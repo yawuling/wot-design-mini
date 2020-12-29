@@ -155,36 +155,36 @@ $-button-border-color: mix($-color-black, $-color-white, 0.65) !default; // 默�
 $-button-primary-color: $-color-theme !default; // 主要按钮颜色
 $-button-primary-bg-color: resultColor(
   $open-linear,
-  127deg,
+  90deg,
   $-color-theme,
   "dark" "light",
-  rgba(255,35,25,1) rgba(255,39,0,1),
+  rgba(255,0,0,1) rgba(255,95,68,1),
   0% 100%
 ) !default; // 主要按钮背景颜色
 $-button-primary-active-color: resultColor(
   $open-linear,
-  127deg,
+  90deg,
   darken($-color-theme, 7%),
   "dark" "light",
-  #FF2319 #FF2700,
+  rgba(237,10,10,1) rgba(242,67,38,1),
   0% 100%
 ) !default; // 主要按钮点击态颜色
 $-button-primary-plain-active-bg-color: rgba(255,39,0,0.1) !default; // 主要按钮点击态颜色
 $-button-primary-disabled-color: resultColor(
   $open-linear,
-  127deg,
+  90deg,
   rgba($-color-theme, 0.6),
   "dark" "light",
-  rgba(255,35,25,0.6) rgba(255,39,0,0.6),
+  rgba(255,179,179,1) rgba(255,204,197,1),
   0% 100%
 ) !default; // 主要按钮禁用颜色
-$-button-primary-plain-disabled-color: themeColor($-color-theme, "light", rgba(255,39,0,0.6)) !default; // 主要按钮点击态文字颜色
-$-button-primary-box-shadow-color: rgba($-color-theme, 0.25) !default; // 主要按钮阴影颜色
+$-button-primary-plain-disabled-color: themeColor($-color-theme, "light", rgba(255,204,197,1)) !default; // 主要按钮点击态文字颜色
+$-button-primary-box-shadow-color: rgba(210,0,0, 0.15) !default; // 主要按钮阴影颜色
 
 $-button-success-color: $-color-success !default; // 成功按钮颜色
 $-button-success-active-color: mix($-color-black, $-button-success-color, 18%) !default; // 成功按钮点击态颜色
 $-button-success-disabled-color: mix($-color-white, $-button-success-color, 42%) !default; // 成功按钮禁用颜色
-$-button-success-box-shadow-color: rgba($-color-success, 0.25) !default; // 主要按钮阴影颜色
+$-button-success-box-shadow-color: rgba($-color-success, 0.15) !default; // 主要按钮阴影颜色
 
 $-button-info-bg-color: #F0F0F0 !default; // 信息按钮背景颜色
 $-button-info-color: $-color-title !default; // 信息按钮颜色
@@ -203,12 +203,12 @@ $-button-info-plain-normal-color: rgba($-color-black, 0.85) !default; // 信息�
 $-button-warning-color: $-color-warning !default; // 警告按钮颜色
 $-button-warning-active-color: mix($-color-black, $-button-warning-color, 18%) !default; // 警告按钮点击颜色
 $-button-warning-disabled-color: mix($-color-white, $-button-warning-color, 42%) !default; // 警告按钮禁用颜色
-$-button-warning-box-shadow-color: rgba($-color-warning, 0.25) !default; // 主要按钮阴影颜色
+$-button-warning-box-shadow-color: rgba($-color-warning, 0.15) !default; // 主要按钮阴影颜色
 
 $-button-error-color: $-color-danger !default; // 错误按钮颜色
 $-button-error-active-color: mix($-color-black, $-button-error-color, 18%) !default; // 错误按钮点击颜色
 $-button-error-disabled-color: mix($-color-white, $-button-error-color, 42%) !default; // 错误按钮禁用颜色
-$-button-error-box-shadow-color: rgba($-color-danger, 0.25) !default; // 主要按钮阴影颜色
+$-button-error-box-shadow-color: rgba($-color-danger, 0.15) !default; // 主要按钮阴影颜色
 
 $-button-suck-height: 50px !default; // suck 类型按钮高度
 $-button-suck-active-color: $-button-primary-plain-active-bg-color !default; // 错误按钮禁用颜色

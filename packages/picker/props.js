@@ -22,7 +22,7 @@ export default {
   },
   loadingColor: {
     type: String,
-    value: '#FF2412'
+    value: '#FA4350'
   },
   /* popup */
   // 弹出层标题

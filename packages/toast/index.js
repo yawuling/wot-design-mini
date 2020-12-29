@@ -42,7 +42,7 @@ VueComponent({
     },
     loadingColor: {
       type: String,
-      default: '#FF2412'
+      default: '#FA4350'
     },
     iconSize: {
       type: String,

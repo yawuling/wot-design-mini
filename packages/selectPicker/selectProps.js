@@ -15,7 +15,7 @@ export default {
   loading: Boolean,
   loadingColor: {
     type: String,
-    value: '#FF2412'
+    value: '#FA4350'
   },
   closeOnClickModal: {
     type: Boolean,
