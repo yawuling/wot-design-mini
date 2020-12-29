@@ -155,7 +155,7 @@ $-button-border-color: mix($-color-black, $-color-white, 0.65) !default; // 默�
 $-button-primary-color: $-color-theme !default; // 主要按钮颜色
 $-button-primary-bg-color: resultColor(
   $open-linear,
-  90deg,
+  270deg,
   $-color-theme,
   "dark" "light",
   rgba(255,0,0,1) rgba(255,95,68,1),
@@ -163,7 +163,7 @@ $-button-primary-bg-color: resultColor(
 ) !default; // 主要按钮背景颜色
 $-button-primary-active-color: resultColor(
   $open-linear,
-  90deg,
+  270deg,
   darken($-color-theme, 7%),
   "dark" "light",
   rgba(237,10,10,1) rgba(242,67,38,1),
@@ -172,7 +172,7 @@ $-button-primary-active-color: resultColor(
 $-button-primary-plain-active-bg-color: rgba(255,39,0,0.1) !default; // 主要按钮点击态颜色
 $-button-primary-disabled-color: resultColor(
   $open-linear,
-  90deg,
+  270deg,
   rgba($-color-theme, 0.6),
   "dark" "light",
   rgba(255,179,179,1) rgba(255,204,197,1),
