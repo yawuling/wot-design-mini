@@ -2,7 +2,7 @@
  * 辅助函数
  */
 @import 'config';
-$default-theme: #4d80f0 !default; // 正常色
+$default-theme: #FF2412 !default; // 正常色
 
 /* 转换成字符串 */
 @function selectorToString($selector) {
@@ -42,7 +42,7 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params $mix-color 自己设置的混色
  */
  @function themeColor($theme-color, $type: "", $mix-color: "") {
-  @if $default-theme != #4d80f0 {
+  @if $default-theme != #FF2412 {
     @if $type == "dark" {
       @return darken($theme-color, 10%);
     } @else if $type == "light" {

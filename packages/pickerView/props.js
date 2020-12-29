@@ -3,7 +3,7 @@ export default {
   loading: Boolean,
   loadingColor: {
     type: String,
-    value: '#4D80F0'
+    value: '#FF2412'
   },
   // 选项总高度
   columnsHeight: {

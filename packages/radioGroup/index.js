@@ -50,7 +50,7 @@ VueComponent({
     },
     checkedColor: {
       type: String,
-      value: '#4d80f0',
+      value: '#FF2412',
       observer (value) {
         this.updateAllChild({ checkedColor: value })
       }

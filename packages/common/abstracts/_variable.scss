@@ -155,30 +155,30 @@ $-button-border-color: mix($-color-black, $-color-white, 0.65) !default; // 默�
 $-button-primary-color: $-color-theme !default; // 主要按钮颜色
 $-button-primary-bg-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
   "dark" "light",
-  #4f7cf8 #668df8,
+  rgba(255,35,25,1) rgba(255,39,0,1),
   0% 100%
 ) !default; // 主要按钮背景颜色
 $-button-primary-active-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   darken($-color-theme, 7%),
   "dark" "light",
-  #416bdf #4e79ee,
+  #FF2319 #FF2700,
   0% 100%
 ) !default; // 主要按钮点击态颜色
-$-button-primary-plain-active-bg-color: #eff4fe !default; // 主要按钮点击态颜色
+$-button-primary-plain-active-bg-color: rgba(255,39,0,0.1) !default; // 主要按钮点击态颜色
 $-button-primary-disabled-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   rgba($-color-theme, 0.6),
   "dark" "light",
-  #8FADFF #9FB8FE,
+  rgba(255,35,25,0.6) rgba(255,39,0,0.6),
   0% 100%
 ) !default; // 主要按钮禁用颜色
-$-button-primary-plain-disabled-color: themeColor($-color-theme, "light", #9DB9F6) !default; // 主要按钮点击态文字颜色
+$-button-primary-plain-disabled-color: themeColor($-color-theme, "light", rgba(255,39,0,0.6)) !default; // 主要按钮点击态文字颜色
 $-button-primary-box-shadow-color: rgba($-color-theme, 0.25) !default; // 主要按钮阴影颜色
 
 $-button-success-color: $-color-success !default; // 成功按钮颜色
@@ -310,10 +310,10 @@ $-drop-menu-item-fs-tip: $-fs-secondary !default; // 提示文字字号
 $-drop-menu-option-check-size: 20px !default; // check 图标大小
 $-drop-menu-line-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
   "dark" "light",
-  rgba(81, 124, 240, 1) rgba(118, 158, 245, 1),
+  #FF2319 #FF2700,
   0% 100%
 ) !default; // 下划线颜色
 $-drop-menu-line-height: 3px !default; // 下划线高度
@@ -439,10 +439,10 @@ $-picker-cell-arrow-size-large: $-cell-icon-size !default; // cell 类型的大�
 $-picker-region-color: rgba($-color-black, 0.45) !default; // 区域选择文字颜色
 $-picker-region-bg-active-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
-  "dark" "light" "light",
-  rgba(79,124,248,1) rgba(102,141,248,1) rgba(102,141,248,1),
+  "dark" "light",
+  rgba(255,35,25,1) rgba(255,39,0,1),
   0% 100% 100%
 ) !default; // 区域选择激活选中背景颜色
 
@@ -456,7 +456,14 @@ $-col-picker-selected-color: rgba($-color-black, 0.85) !default; // 弹框顶部
 $-col-picker-selected-fw: 700 !default; // 弹框顶部值高亮字重
 $-col-picker-line-width: 16px !default; // 弹框顶部值高亮线条宽度
 $-col-picker-line-height: 3px !default; // 弹框顶部值高亮线条高度
-$-col-picker-line-color: linear-gradient(315deg, rgba(81,124,240,1), rgba(118,158,245,1)) !default; // 弹框顶部值高亮线条颜色
+$-col-picker-line-color: resultColor(
+  $open-linear,
+  127deg,
+  $-color-theme,
+  "dark" "light",
+  #FF2319 #FF2700,
+  0% 100%
+) !default; // 弹框顶部值高亮线条颜色
 $-col-picker-line-box-shadow: 0px 1px 2px 0px rgba(1, 87, 255, 0.2) !default; // 弹框顶部值高亮线条阴影
 $-col-picker-list-height: 53vh !default; // 弹框列表高度
 $-col-picker-list-padding-bottom: 30px !default; // 弹框列表底部间距
@@ -480,10 +487,10 @@ $-progress-danger-color: $-color-danger !default; // 进度条danger颜色
 $-progress-success-color: $-color-success !default; // 进度条success进度条颜色
 $-progress-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
   "dark" "light",
-  #517CF0 #769EF5 ,
+  rgba(255,35,25,1) rgba(255,39,0,1),
   0% 100%
 ) !default; // 进度条渐变色
 $-progress-linear-success-color: resultColor(
@@ -570,10 +577,10 @@ $-slider-color: #333 !default; // 字体颜色
 $-slider-axie-bg: #E5E5E5 !default; // 滑轴的默认背景色
 $-slider-line-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
   "dark" "light",
-  #517CF0 #769EF5 ,
+  rgba(255,35,25,1) rgba(255,39,0,1),
   0% 100%
 ) !default; // 进度条颜色
 $-slider-disabled-color: rgba($-color-black, 0.25) !default; // 禁用状态下字体颜色
@@ -585,10 +592,10 @@ $-sort-button-height: 48px !default; // 高度
 $-sort-button-line-height: 3px !default; // 下划线高度
 $-sort-button-line-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
   "dark" "light",
-  rgba(81, 124, 240, 1) rgba(118, 158, 245, 1),
+  #FF2319 #FF2700,
   0% 100%
 ) !default; // 下划线颜色
 
@@ -614,10 +621,10 @@ $-switch-circle-size: 28px !default; // 圆点大小
 $-switch-border-color: #e5e5e5 !default; // 边框颜色选中状态背景颜色
 $-switch-active-color: resultColor(
   $open-linear,
-  315deg,
+  127deg,
   $-color-theme,
-  "light" "dark",
-  #4f7cf8 #668df8,
+  "dark" "light",
+  #FF2319 #FF2700,
   0% 100%
 ) !default; // 选中状态背景
 $-switch-active-shadow-color: rgba(0, 83, 162, 0.5) !default; // 选中状态shadow颜色
@@ -626,7 +633,7 @@ $-switch-inactive-color: resultColor(
   315deg,
   #dadada,
   "light" "dark" "dark",
-  #f2f2f2 #dadada #668df8,
+  #f2f2f2 #dadada rgba(255,39,0,0.6),
   0% 100% 100%
 ) !default; // 非选中背景颜色
 $-switch-inactive-shadow-color: rgba(155, 155, 155, 0.5) !default; // 非选中状态shadow颜色
@@ -646,10 +653,10 @@ $-tabs-nav-disabled-color: rgba($-color-black, 0.25) !default; // 头部禁用�
 $-tabs-nav-line-height: 3px !default; // 高亮边框高度
 $-tabs-nav-line-bg-color: resultColor(
     $open-linear,
-    315deg,
+    127deg,
     $-color-theme,
     "dark" "light",
-    rgba(81, 124, 240, 1) rgba(118, 158, 245, 1),
+    #FF2319 #FF2700,
     0% 100%
 ) !default; // 底部条颜色
 $-tabs-nav-map-fs: $-fs-content !default; // map 类型按钮字号
