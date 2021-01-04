@@ -2,6 +2,13 @@
 
 ### 2.2.1
 
+#### 新特效
+
+- Input
+  - 添加自定义外部类名 `custom-textarea-container-class` (by [@yawuling](https://github.com/yawuling) ) )
+- Upload
+  - `file` 对象添加 `response` 字段 (by [@yawuling](https://github.com/yawuling) ) )
+
 #### Bug 修复
 
 - MessageBox
