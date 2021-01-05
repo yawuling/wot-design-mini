@@ -1,0 +1,51 @@
+@import '../../../common/abstracts/variable';
+@import '../../../common/abstracts/mixin';
+
+@include b(month) {
+  @include e(title) {
+    padding: 15px 0;
+    text-align: center;
+    font-size: $-calendar-month-title-fs;
+    color: $-calendar-month-title-color;
+  }
+  @include e(days) {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: $-calendar-day-fs;
+    color: $-calendar-day-color;
+  }
+  @include e(day) {
+    width: 14.285%;
+    margin-bottom: 5px;
+  }
+  @include e(day-body) {
+    width: $-calendar-day-size;
+    height: $-calendar-day-size;
+    line-height: $-calendar-day-size;
+    margin: 0 auto;
+    text-align: center;
+    transition: background .2s, color .2s;
+
+    @include when(today) {
+      color: $-calendar-active-color;
+    }
+    @include when(selected) {
+      background-color: $-calendar-active-color;
+      border-radius: 50%;
+      color: #fff;
+    }
+    @include when(selected-range) {
+      background-color: $-calendar-range-color;
+    }
+    @include when(selected-start) {
+      background-color: $-calendar-active-color;
+      border-radius: 50%;
+      color: #fff;
+    }
+    @include when(selected-end) {
+      background-color: $-calendar-active-color;
+      border-radius: 50%;
+      color: #fff;
+    }
+  }
+}
