@@ -1,0 +1,21 @@
+<jds src="../../utils.jds" module="utils" />
+
+<view class="wd-month">
+  <view class="wd-month__title">{{ utils.formatMonthTitle(date) }}</view>
+  <view class="wd-month__days">
+    <view
+      jd:for="{{ days }}"
+      jd:key="date"
+      class="wd-month__day"
+      style="{{ utils.getFirstDayStyle(index, item.date, firstDayOfWeek) }}"
+      data-index="{{ index }}"
+      catchtap="handleDateClick"
+    >
+      <view class="wd-month__day-body {{ item.type ? utils.join(item.type) : '' }}">
+        <view class="wd-month__day-top">{{ item.topInfo }}</view>
+        {{ item.text }}
+        <view class="wd-month__day-bottom">{{ item.bottomInfo }}</view>
+      </view>
+    </view>
+  </view>
+</view>
