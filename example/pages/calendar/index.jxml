@@ -1,0 +1,4 @@
+<wd-cell-group>
+  <wd-calendar label="单个日期选择" type="week" value="{{ value1 }}" bind:confirm="handleConfirm1"></wd-calendar>
+  <!-- <wd-calendar label="多个日期选择" type="dates"></wd-calendar> -->
+</wd-cell-group>
