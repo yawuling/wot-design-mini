@@ -1,0 +1,28 @@
+<demo-block title="单个日期选择">
+  <view>
+    <view style="margin-bottom: 10px; font-size: 13px;">切换类型：</view>
+    <wd-radio-group value="{{ type1 }}" shape="button" bind:change="handleTypeChange1">
+      <wd-radio value="date">date</wd-radio>
+      <wd-radio value="week">week</wd-radio>
+      <wd-radio value="month">month</wd-radio>
+    </wd-radio-group>
+  </view>
+  <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:confirm="handleConfirm1"></wd-calendar-view>
+</demo-block>
+<demo-block title="多个日期选择">
+  <wd-calendar-view type="dates" value="{{ value2 }}" bind:confirm="handleConfirm2"></wd-calendar-view>
+</demo-block>
+<demo-block title="日期范围选择">
+  <view>
+    <view style="margin-bottom: 10px; font-size: 13px;">切换类型：</view>
+    <wd-radio-group value="{{ type2 }}" shape="button" bind:change="handleTypeChange2">
+      <wd-radio value="daterange">daterange</wd-radio>
+      <wd-radio value="weekrange">weekrange</wd-radio>
+      <wd-radio value="monthrange">monthrange</wd-radio>
+    </wd-radio-group>
+  </view>
+  <wd-calendar-view type="{{ type2 }}" value="{{ value3 }}" bind:confirm="handleConfirm3"></wd-calendar-view>
+</demo-block>
+<demo-block title="限制最大选择范围">
+  <wd-calendar-view type="daterange" max-range="{{ 3 }}"></wd-calendar-view>
+</demo-block>

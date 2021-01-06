@@ -254,9 +254,12 @@ $-calendar-month-title-fs: 14px !default;
 $-calendar-month-title-color: rgba(0, 0, 0, 0.85) !default;
 $-calendar-day-fs: 14px !default;
 $-calendar-day-color: rgba(0, 0, 0, 0.65) !default;
-$-calendar-day-size: 40px !default;
+$-calendar-day-size: 30px !default;
 $-calendar-active-color: $-color-theme !default;
-$-calendar-range-color: $-color-theme-light !default;
+$-calendar-disabled-color: rgba(0, 0, 0, 0.25) !default;
+$-calendar-range-color: rgba($-color-theme, 0.15) !default;
+$-calendar-day-info-size: 16px !default;
+$-calendar-day-info-fs: 12px !default;
 
 /* checkbox */
 $-checkbox-margin: 10px !default; // 多个复选框距离
