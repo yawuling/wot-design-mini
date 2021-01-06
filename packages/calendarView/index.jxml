@@ -1,0 +1,27 @@
+<view class="wd-calendar-view">
+  <year-panel
+    jd:if="{{ type === 'month' || type === 'monthrange' }}"
+    type="{{ type }}"
+    value="{{ value }}"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    formatter="{{ formatter }}"
+    max-range="{{ maxRange }}"
+    range-prompt="{{ rangePrompt }}"
+    allow-same-day="{{ allowSameDay }}"
+    bind:change="handleChange"
+  />
+  <month-panel
+    jd:else
+    type="{{ type }}"
+    value="{{ value }}"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    first-day-of-week="{{ firstDayOfWeek }}"
+    formatter="{{ formatter }}"
+    max-range="{{ maxRange }}"
+    range-prompt="{{ rangePrompt }}"
+    allow-same-day="{{ allowSameDay }}"
+    bind:change="handleChange"
+  />
+</view>

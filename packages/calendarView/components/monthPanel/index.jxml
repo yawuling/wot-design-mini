@@ -18,6 +18,10 @@
       min-date="{{ minDate }}"
       max-date="{{ maxDate }}"
       first-day-of-week="{{ firstDayOfWeek }}"
+      formatter="{{ formatter }}"
+      max-range="{{ maxRange }}"
+      range-prompt="{{ rangePrompt }}"
+      allow-same-day="{{ allowSameDay }}"
       bind:change="handleDateChange"
     />
   </scroll-view>
