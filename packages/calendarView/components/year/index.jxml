@@ -1,0 +1,19 @@
+<jds src="../../utils.jds" module="utils" />
+
+<view class="wd-year">
+  <view class="wd-year__title">{{ utils.formatYearTitle(date) }}</view>
+  <view class="wd-year__months">
+    <view
+      jd:for="{{ months }}"
+      jd:key="date"
+      class="wd-year__month {{ item.disabled ? 'is-disabled' : '' }} {{ item.type ? utils.join(item.type) : '' }}"
+      data-index="{{ index }}"
+      catchtap="handleDateClick"
+    >
+      <view class="wd-year__month-text">
+        {{ item.text }}月
+      </view>
+      <view class="wd-year__month-bottom">{{ item.bottomInfo }}</view>
+    </view>
+  </view>
+</view>

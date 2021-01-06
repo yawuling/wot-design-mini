@@ -1,0 +1,22 @@
+<jds src="../../utils.jds" module="utils" />
+
+<view class="wd-year-panel">
+  <scroll-view class="wd-year-panel__container" scroll-y scroll-into-view="{{ scrollIntoView }}">
+    <year
+      jd:for="{{ utils.getYears(minDate, maxDate) }}"
+      jd:key="*this"
+      id="year{{index}}"
+      class="year"
+      type="{{ type }}"
+      date="{{ item }}"
+      data-date="{{ item }}"
+      value="{{ value }}"
+      min-date="{{ minDate }}"
+      max-date="{{ maxDate }}"
+      max-range="{{ maxRange }}"
+      range-prompt="{{ rangePrompt }}"
+      allow-same-day="{{ allowSameDay }}"
+      bind:change="handleDateChange"
+    />
+  </scroll-view>
+</view>
