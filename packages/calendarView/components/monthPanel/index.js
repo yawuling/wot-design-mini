@@ -4,34 +4,25 @@ import { getType } from '../../../common/util'
 
 VueComponent({
   props: {
-    show: {
-      type: Boolean,
-      observer (val) {
-        if (val) {
-          setTimeout(() => {
-            this.initRect()
-            this.scrollIntoView()
-          }, 300)
-        }
-      }
-    },
     type: String,
     value: {
       type: [null, Number, Array]
     },
     minDate: Number,
     maxDate: Number,
-    firstDayOfWeek: Number
+    firstDayOfWeek: Number,
+    formatter: null,
+    maxRange: Number,
+    rangePrompt: String,
+    allowSameDay: Boolean
   },
   data: {
     title: '',
     scrollIntoView: ''
   },
   mounted () {
-    if (this.data.show) {
-      this.initRect()
-      this.scrollIntoView()
-    }
+    this.initRect()
+    this.scrollIntoView()
   },
   methods: {
     initRect () {
@@ -56,11 +47,9 @@ VueComponent({
       })
     },
     scrollIntoView () {
-      this.requestAnimationFrame(() => {
-        if (!this.data.show) return
-
+      this.requestAnimationFrame().then(() => {
         let activeDate
-        let type = getType(this.data.value)
+        const type = getType(this.data.value)
         if (type === 'array') {
           activeDate = this.data.value[0]
         } else if (type === 'number') {

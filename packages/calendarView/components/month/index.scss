@@ -1,0 +1,103 @@
+@import '../../../common/abstracts/variable';
+@import '../../../common/abstracts/mixin';
+
+@include b(month) {
+  @include e(title) {
+    padding: 15px 0;
+    text-align: center;
+    font-size: $-calendar-month-title-fs;
+    color: $-calendar-month-title-color;
+  }
+  @include e(days) {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: $-calendar-day-fs;
+    color: $-calendar-day-color;
+  }
+  @include e(day) {
+    position: relative;
+    width: 14.285%;
+    margin-bottom: 6px;
+
+    @include when(disabled) {
+      .wd-month__day-text {
+        color: $-calendar-disabled-color;
+      }
+    }
+    @include when(current) {
+      .wd-month__day-text {
+        color: $-calendar-active-color;
+      }
+    }
+    @include when(selected) {
+      .wd-month__day-text {
+        width: $-calendar-day-size;
+        background-color: $-calendar-active-color;
+        border-radius: 50%;
+        color: #fff;
+      }
+    }
+    @include when(middle) {
+      .wd-month__day-text {
+        background-color: $-calendar-range-color;
+      }
+    }
+    @include when(start) {
+      .wd-month__day-text {
+        width: $-calendar-day-size;
+        background-color: $-calendar-active-color;
+        border-radius: 50%;
+        color: #fff;
+
+        &::after {
+          position: absolute;
+          content: '';
+          width: calc(50% + #{$-calendar-day-size / 2});
+          right: 0;
+          top: 0;
+          height: $-calendar-day-size;
+          background-color: $-calendar-range-color;
+          border-top-left-radius: $-calendar-day-size / 2;
+          border-bottom-left-radius: $-calendar-day-size / 2;
+        }
+      }
+    }
+    @include when(without-end) {
+      .wd-month__day-text::after {
+        display: none;
+      }
+    }
+    @include when(end) {
+      .wd-month__day-text {
+        width: $-calendar-day-size;
+        background-color: $-calendar-active-color;
+        border-radius: 50%;
+        color: #fff;
+
+        &::after {
+          position: absolute;
+          content: '';
+          width: calc(50% + #{$-calendar-day-size / 2});
+          left: 0;
+          top: 0;
+          height: $-calendar-day-size;
+          background-color: $-calendar-range-color;
+          border-top-right-radius: $-calendar-day-size / 2;
+          border-bottom-right-radius: $-calendar-day-size / 2;
+        }
+      }
+    }
+  }
+  @include e(day-text) {
+    height: $-calendar-day-size;
+    line-height: $-calendar-day-size;
+    margin: 0 auto;
+    text-align: center;
+  }
+  @include e(day-bottom) {
+    height: $-calendar-day-info-size;
+    line-height: $-calendar-day-info-size;
+    font-size: $-calendar-day-info-fs;
+    text-align: center;
+  }
+}

@@ -49,7 +49,7 @@
     "pages/sticky/index",
     "pages/pagination/index",
     "pages/resize/index",
-    "pages/calendar/index"
+    "pages/calendarView/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
