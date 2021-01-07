@@ -95,7 +95,7 @@
     text-align: center;
   }
   @include e(day-bottom) {
-    height: $-calendar-day-info-size;
+    min-height: $-calendar-day-info-size;
     line-height: $-calendar-day-info-size;
     font-size: $-calendar-day-info-fs;
     text-align: center;
