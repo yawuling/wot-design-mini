@@ -3,10 +3,10 @@
 
 @include b(month) {
   @include e(title) {
-    padding: 15px 0;
+    padding: 13px 0;
     text-align: center;
-    font-size: $-calendar-month-title-fs;
-    color: $-calendar-month-title-color;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
   }
   @include e(days) {
     display: flex;
@@ -17,7 +17,9 @@
   @include e(day) {
     position: relative;
     width: 14.285%;
-    margin-bottom: 6px;
+    height: $-calendar-day-height;
+    line-height: $-calendar-day-height;
+    text-align: center;
 
     @include when(disabled) {
       .wd-month__day-text {
@@ -25,79 +27,53 @@
       }
     }
     @include when(current) {
-      .wd-month__day-text {
-        color: $-calendar-active-color;
-      }
+      color: $-calendar-active-color;
     }
     @include when(selected) {
-      .wd-month__day-text {
-        width: $-calendar-day-size;
-        background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
-      }
+      border-radius: $-calendar-active-border;
+      background-color: $-calendar-active-color;
+      color: #fff;
     }
     @include when(middle) {
-      .wd-month__day-text {
-        background-color: $-calendar-range-color;
-      }
+      background-color: $-calendar-range-color;
     }
     @include when(start) {
-      .wd-month__day-text {
-        width: $-calendar-day-size;
-        background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
-
-        &::after {
-          position: absolute;
-          content: '';
-          width: calc(50% + #{$-calendar-day-size / 2});
-          right: 0;
-          top: 0;
-          height: $-calendar-day-size;
-          background-color: $-calendar-range-color;
-          border-top-left-radius: $-calendar-day-size / 2;
-          border-bottom-left-radius: $-calendar-day-size / 2;
-        }
-      }
-    }
-    @include when(without-end) {
-      .wd-month__day-text::after {
-        display: none;
-      }
+      background-color: $-calendar-active-color;
+      color: #fff;
+      border-top-left-radius: $-calendar-active-border;
+      border-bottom-left-radius: $-calendar-active-border;
     }
     @include when(end) {
-      .wd-month__day-text {
-        width: $-calendar-day-size;
-        background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
-
-        &::after {
-          position: absolute;
-          content: '';
-          width: calc(50% + #{$-calendar-day-size / 2});
-          left: 0;
-          top: 0;
-          height: $-calendar-day-size;
-          background-color: $-calendar-range-color;
-          border-top-right-radius: $-calendar-day-size / 2;
-          border-bottom-right-radius: $-calendar-day-size / 2;
-        }
-      }
+      background-color: $-calendar-active-color;
+      color: #fff;
+      border-top-right-radius: $-calendar-active-border;
+      border-bottom-right-radius: $-calendar-active-border;
+    }
+    @include when(same) {
+      background-color: $-calendar-active-color;
+      color: #fff;
+      border-radius: $-calendar-active-border;
     }
   }
   @include e(day-text) {
-    height: $-calendar-day-size;
-    line-height: $-calendar-day-size;
-    margin: 0 auto;
+    font-weight: $-calendar-day-fw;
+  }
+  @include e(day-top) {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
     text-align: center;
   }
   @include e(day-bottom) {
-    min-height: $-calendar-day-info-size;
-    line-height: $-calendar-day-info-size;
-    font-size: $-calendar-day-info-fs;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
     text-align: center;
   }
 }

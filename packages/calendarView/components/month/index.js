@@ -1,5 +1,5 @@
 import VueComponent from '../../../common/component'
-import { compareDate, getMonthEndDay, getWeekRange, getDayOffset, getDayByOffset } from '../../utils'
+import { compareDate, getMonthEndDay, getWeekRange, getDayOffset, getDayByOffset, getDateByDefaultTime } from '../../utils'
 import { getType } from '../../../common/util'
 import Toast from '../../../toast/toast.js'
 
@@ -36,7 +36,8 @@ VueComponent({
     },
     maxRange: Number,
     rangePrompt: String,
-    allowSameDay: Boolean
+    allowSameDay: Boolean,
+    defaultTime: Array
   },
   methods: {
     setDays () {
@@ -56,23 +57,10 @@ VueComponent({
       for (let day = 1; day <= totalDay; day++) {
         const date = new Date(year, month, day).getTime()
         let type = this.getDayType(date, value)
-        if ((type.length === 0) && compareDate(date, Date.now()) === 0) {
-          type = ['is-current']
+        if (!type && compareDate(date, Date.now()) === 0) {
+          type = 'current'
         }
-        let dayObj = {
-          date: date,
-          text: day,
-          bottomInfo: '',
-          type,
-          disabled: compareDate(date, this.data.minDate) === -1 || compareDate(date, this.data.maxDate) === 1
-        }
-        if (this.data.formatter) {
-          if (getType(this.data.formatter) === 'function') {
-            dayObj = this.data.formatter(dayObj)
-          } else {
-            console.error('[wot-design] error(wd-calendar-view): the formatter prop of wd-calendar-view should be a function')
-          }
-        }
+        const dayObj = this.getFormatterDate(date, day, type)
         days.push(dayObj)
       }
 
@@ -87,7 +75,7 @@ VueComponent({
       case 'dates':
         return this.getDatesType(date)
       case 'daterange':
-        return this.getRangeType(date, value)
+        return this.getDateRangeType(date, value)
       case 'week':
         return this.getRangeType(date, value)
       case 'weekrange':
@@ -98,19 +86,19 @@ VueComponent({
     },
     getDateType (date) {
       if (this.data.value && compareDate(date, this.data.value) === 0) {
-        return ['is-selected']
-      } else {
-        return []
+        return 'selected'
       }
+
+      return ''
     },
     getDatesType (date) {
-      if (!this.data.value) return []
+      if (!this.data.value) return ''
 
-      let type = []
+      let type = ''
 
       this.data.value.some((item) => {
         if (compareDate(date, item) === 0) {
-          type = ['is-selected']
+          type = 'selected'
 
           return true
         }
@@ -120,23 +108,33 @@ VueComponent({
 
       return type
     },
+    getDateRangeType (date, value) {
+      const [startDate, endDate] = value || []
+
+      if (startDate && compareDate(date, startDate) === 0) {
+        if (this.data.allowSameDay && endDate && compareDate(startDate, endDate) === 0) {
+          return 'same'
+        }
+        return 'start'
+      } else if (endDate && compareDate(date, endDate) === 0) {
+        return 'end'
+      } else if (startDate && endDate && compareDate(date, startDate) === 1 && compareDate(date, endDate) === -1) {
+        return 'middle'
+      } else {
+        return ''
+      }
+    },
     getRangeType (date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
-        const type = ['is-start']
-
-        if (!endDate || startDate === endDate) {
-          type.push('is-without-end')
-        }
-
-        return type
+        return 'start'
       } else if (endDate && compareDate(date, endDate) === 0) {
-        return ['is-end']
+        return 'end'
       } else if (startDate && endDate && compareDate(date, startDate) === 1 && compareDate(date, endDate) === -1) {
-        return ['is-middle']
+        return 'middle'
       } else {
-        return []
+        return ''
       }
     },
     getWeekValue () {
@@ -184,12 +182,17 @@ VueComponent({
         this.handleDateChange(date)
       }
     },
+    getDate (date, isEnd) {
+      return this.data.defaultTime && this.data.defaultTime.length > 0
+        ? getDateByDefaultTime(date, isEnd ? this.data.defaultTime[1] : this.data.defaultTime[0])
+        : date
+    },
     handleDateChange (date) {
       if (date.disabled) return
 
-      if (date.type.indexOf('is-selected') === -1) {
+      if (date.type !== 'selected') {
         this.$emit('change', {
-          value: date.date
+          value: this.getDate(date.date)
         })
       }
     },
@@ -197,8 +200,8 @@ VueComponent({
       if (date.disabled) return
 
       const value = this.data.value || []
-      if (date.type.indexOf('is-selected') === -1) {
-        value.push(date.date)
+      if (date.type !== 'seleced') {
+        value.push(this.getDate(date.date))
       } else {
         value.splice(value.indexOf(date.date), 1)
       }
@@ -220,59 +223,60 @@ VueComponent({
         // 不能选择超过最大范围的日期
         if (this.data.maxRange && getDayOffset(date.date, startDate) > this.data.maxRange) {
           const maxEndDate = getDayByOffset(startDate, this.data.maxRange - 1)
-          value = [startDate, maxEndDate]
+          value = [startDate, this.getDate(maxEndDate, true)]
           Toast({
             msg: this.data.rangePrompt || `选择天数不能超过${this.data.maxRange}天`,
             context: this
           })
         } else {
-          value = [startDate, date.date]
+          value = [startDate, this.getDate(date.date, true)]
         }
       } else {
-        value = [date.date, null]
+        value = [this.getDate(date.date), null]
       }
       this.$emit('change', {
         value
       })
     },
     handleWeekChange (date) {
-      if (date.type && (date.type.indexOf('is-selected') > -1 || date.type.indexOf('is-middle') > -1)) return
+      if (date.type === 'selected' || date.type === 'middle') return
 
       const [weekStart] = getWeekRange(date.date)
 
       // 周的第一天如果是禁用状态，则不可选中
-      if (this.getFormatterDate(weekStart).disabled) return
+      if (this.getFormatterDate(weekStart, new Date(weekStart).getDate()).disabled) return
 
       this.$emit('change', {
-        value: weekStart
+        value: this.getDate(weekStart)
       })
     },
     handleWeekRangeChange (date) {
       const [weekStartDate] = getWeekRange(date.date)
 
       // 周的第一天如果是禁用状态，则不可选中
-      if (this.getFormatterDate(weekStartDate).disabled) return
+      if (this.getFormatterDate(weekStartDate, new Date(weekStartDate).getDate()).disabled) return
 
       let value
       const [startDate, endDate] = this.data.value || []
       const [startWeekStartDate] = startDate ? getWeekRange(startDate) : []
 
       if (startDate && !endDate && compareDate(weekStartDate, startWeekStartDate) > -1) {
-        value = [startWeekStartDate, weekStartDate]
+        value = [this.getDate(startWeekStartDate), this.getDate(weekStartDate)]
       } else {
-        value = [weekStartDate, null]
+        value = [this.getDate(weekStartDate), null]
       }
 
       this.$emit('change', {
         value
       })
     },
-    getFormatterDate (date) {
+    getFormatterDate (date, day, type) {
       let dayObj = {
         date: date,
-        text: new Date(date).getDate(),
+        text: day,
+        topInfo: '',
         bottomInfo: '',
-        type: [],
+        type,
         disabled: compareDate(date, this.data.minDate) === -1 || compareDate(date, this.data.maxDate) === 1
       }
       if (this.data.formatter) {

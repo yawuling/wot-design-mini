@@ -3,10 +3,10 @@
 
 @include b(year) {
   @include e(title) {
-    padding: 15px 0;
+    padding: 13px 0;
     text-align: center;
-    font-size: $-calendar-month-title-fs;
-    color: $-calendar-month-title-color;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
   }
   @include e(months) {
     display: flex;
@@ -17,7 +17,9 @@
   @include e(month) {
     position: relative;
     width: 25%;
-    margin-bottom: 6px;
+    height: $-calendar-day-height;
+    line-height: $-calendar-day-height;
+    text-align: center;
 
     @include when(disabled) {
       .wd-year__month-text {
@@ -25,79 +27,88 @@
       }
     }
     @include when(current) {
-      .wd-year__month-text {
-        color: $-calendar-active-color;
-      }
+      color: $-calendar-active-color;
     }
     @include when(selected) {
+      color: #fff;
+
       .wd-year__month-text {
-        width: $-calendar-day-size;
+        border-radius: $-calendar-active-border;
         background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
       }
     }
     @include when(middle) {
-      .wd-year__month-text {
-        background-color: $-calendar-range-color;
-      }
+      background-color: $-calendar-range-color;
     }
     @include when(start) {
-      .wd-year__month-text {
-        width: $-calendar-day-size;
-        background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
+      color: #fff;
 
-        &::after {
-          position: absolute;
-          content: '';
-          width: calc(50% + #{$-calendar-day-size / 2});
-          right: 0;
-          top: 0;
-          height: $-calendar-day-size;
-          background-color: $-calendar-range-color;
-          border-top-left-radius: $-calendar-day-size / 2;
-          border-bottom-left-radius: $-calendar-day-size / 2;
-        }
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 50%;
+        bottom: 0;
+        content: '';
+        background-color: $-calendar-range-color;
       }
-    }
-    @include when(without-end) {
-      .wd-year__month-text::after {
+      .wd-year__month-text {
+        background-color: $-calendar-active-color;
+        border-top-left-radius: $-calendar-active-border;
+        border-bottom-left-radius: $-calendar-active-border;
+      }
+      &.is-without-end::after {
         display: none;
       }
     }
     @include when(end) {
-      .wd-year__month-text {
-        width: $-calendar-day-size;
-        background-color: $-calendar-active-color;
-        border-radius: 50%;
-        color: #fff;
+      color: #fff;
 
-        &::after {
-          position: absolute;
-          content: '';
-          width: calc(50% + #{$-calendar-day-size / 2});
-          left: 0;
-          top: 0;
-          height: $-calendar-day-size;
-          background-color: $-calendar-range-color;
-          border-top-right-radius: $-calendar-day-size / 2;
-          border-bottom-right-radius: $-calendar-day-size / 2;
-        }
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 50%;
+        bottom: 0;
+        content: '';
+        background-color: $-calendar-range-color;
+      }
+      .wd-year__month-text {
+        background-color: $-calendar-active-color;
+        border-top-right-radius: $-calendar-active-border;
+        border-bottom-right-radius: $-calendar-active-border;
+      }
+    }
+    @include when(same) {
+      color: #fff;
+
+      .wd-year__month-text {
+        background-color: $-calendar-active-color;
+        border-radius: $-calendar-active-border;
       }
     }
   }
   @include e(month-text) {
-    height: $-calendar-day-size;
-    line-height: $-calendar-day-size;
+    width: $-calendar-month-width;
     margin: 0 auto;
     text-align: center;
   }
+  @include e(month-top) {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
+    text-align: center;
+  }
   @include e(month-bottom) {
-    height: $-calendar-day-info-size;
-    line-height: $-calendar-day-info-size;
-    font-size: $-calendar-day-info-fs;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    line-height: 1.1;
+    font-size: $-calendar-info-fs;
     text-align: center;
   }
 }

@@ -1,3 +1,5 @@
+import { getType } from '../common/util'
+
 /**
  * 比较两个时间的日期是否相等
  * @param {timestamp} date1
@@ -83,6 +85,18 @@ export function formatMonthTitle (date) {
 }
 
 /**
+ * 格式化年份
+ * @param {timestamp} date
+ */
+export function formatYearTitle (date) {
+  date = new Date(date)
+
+  const year = date.getFullYear()
+
+  return year + '年'
+}
+
+/**
  * 根据最小日期和最大日期获取这之间总共有几个月份
  * @param {timestamp} minDate
  * @param {timestamp} maxDate
@@ -154,6 +168,54 @@ export function getDayOffset (date1, date2) {
 export function getDayByOffset (date, offset) {
   date = new Date(date)
   date.setDate(date.getDate() + offset)
+
+  return date.getTime()
+}
+
+export function getMonthOffset (date1, date2) {
+  date1 = new Date(date1)
+  date2 = new Date(date2)
+
+  const year1 = date1.getFullYear()
+  const year2 = date2.getFullYear()
+  let month1 = date1.getMonth()
+  const month2 = date2.getMonth()
+
+  month1 = (year1 - year2) * 12 + month1
+
+  return month1 - month2 + 1
+}
+
+export function getMonthByOffset (date, offset) {
+  date = new Date(date)
+  date.setMonth(date.getMonth() + offset)
+
+  return date.getTime()
+}
+
+export function getDefaultTime (defaultTime) {
+  if (getType(defaultTime) === 'array') {
+    const startTime = (defaultTime[0] || '00:00:00').split(':').map(item => {
+      return parseInt(item)
+    })
+    const endTime = (defaultTime[1] || '00:00:00').split(':').map(item => {
+      return parseInt(item)
+    })
+    return [startTime, endTime]
+  } else {
+    const time = (defaultTime || '00:00:00').split(':').map(item => {
+      return parseInt(item)
+    })
+
+    return [time, time]
+  }
+}
+
+export function getDateByDefaultTime (date, defaultTime) {
+  date = new Date(date)
+  date.setHours(defaultTime[0])
+  date.setMinutes(defaultTime[1])
+  date.setSeconds(defaultTime[2])
 
   return date.getTime()
 }

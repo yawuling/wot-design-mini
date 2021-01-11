@@ -7,10 +7,10 @@
       <wd-radio value="month">month</wd-radio>
     </wd-radio-group>
   </view>
-  <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:confirm="handleConfirm1"></wd-calendar-view>
+  <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:change="handleChange1"></wd-calendar-view>
 </demo-block>
 <demo-block title="多个日期选择" hor="{{ 0 }}">
-  <wd-calendar-view type="dates" value="{{ value2 }}" bind:confirm="handleConfirm2"></wd-calendar-view>
+  <wd-calendar-view type="dates" value="{{ value2 }}" bind:change="handleChange2"></wd-calendar-view>
 </demo-block>
 <demo-block title="日期范围选择" hor="{{ 0 }}">
   <view style="margin: 0 15px 10px;">
@@ -21,13 +21,13 @@
       <wd-radio value="monthrange">monthrange</wd-radio>
     </wd-radio-group>
   </view>
-  <wd-calendar-view type="{{ type2 }}" value="{{ value3 }}" bind:confirm="handleConfirm3"></wd-calendar-view>
+  <wd-calendar-view type="{{ type2 }}" value="{{ value3 }}" bind:change="handleChange3"></wd-calendar-view>
 </demo-block>
 <demo-block title="限制最大选择范围" hor="{{ 0 }}">
   <wd-calendar-view type="daterange" max-range="{{ 3 }}"></wd-calendar-view>
 </demo-block>
 <demo-block title="自定义日期" hor="{{ 0 }}">
-  <wd-calendar-view type="daterange" value="{{ value4 }}" formatter="{{ formatter }}"></wd-calendar-view>
+  <wd-calendar-view type="daterange" allow-same-day value="{{ value4 }}" formatter="{{ formatter }}"></wd-calendar-view>
 </demo-block>
 <demo-block title="设置周起始日" hor="{{ 0 }}">
   <wd-calendar-view first-day-of-week="{{ 1 }}"></wd-calendar-view>
