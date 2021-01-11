@@ -1,0 +1,29 @@
+@import '../../../common/abstracts/variable';
+@import '../../../common/abstracts/mixin';
+
+@include b(month-panel) {
+  font-size: $-calendar-fs;
+  padding: $-calendar-panel-padding;
+
+  @include e(title) {
+    padding: 5px 0;
+    text-align: center;
+    font-size: $-calendar-panel-title-fs;
+    color: $-calendar-panel-title-color;
+  }
+  @include e(weeks) {
+    display: flex;
+    height: $-calendar-week-height;
+    line-height: $-calendar-week-height;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.02);
+    color: $-calendar-week-color;
+    font-size: $-calendar-week-fs;
+  }
+  @include e(week) {
+    flex: 1;
+    text-align: center;
+  }
+  @include e(container) {
+    height: 378px;
+  }
+}

@@ -1,0 +1,29 @@
+<jds src="../../utils.jds" module="utils" />
+
+<view class="wd-month-panel">
+  <view jd:if="{{ showPanelTitle }}" class="wd-month-panel__title">{{ title }}</view>
+  <view class="wd-month-panel__weeks">
+    <view jd:for="{{ 7 }}" jd:key="*this" class="wd-month-panel__week">{{ utils.getWeekLabel(item + firstDayOfWeek) }}</view>
+  </view>
+  <scroll-view class="wd-month-panel__container" scroll-y scroll-into-view="{{ scrollIntoView }}">
+    <month
+      jd:for="{{ utils.getMonths(minDate, maxDate) }}"
+      jd:key="*this"
+      id="month{{index}}"
+      class="month"
+      type="{{ type }}"
+      date="{{ item }}"
+      data-date="{{ item }}"
+      value="{{ value }}"
+      min-date="{{ minDate }}"
+      max-date="{{ maxDate }}"
+      first-day-of-week="{{ firstDayOfWeek }}"
+      formatter="{{ formatter }}"
+      max-range="{{ maxRange }}"
+      range-prompt="{{ rangePrompt }}"
+      allow-same-day="{{ allowSameDay }}"
+      default-time="{{ defaultTime }}"
+      bind:change="handleDateChange"
+    />
+  </scroll-view>
+</view>
