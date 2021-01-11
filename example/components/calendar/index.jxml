@@ -1,23 +1,35 @@
 <wd-action-sheet
   show="{{ show }}"
   duration="{{ 250 }}"
-  title="{{ title || '日期选择' }}"
   close-on-click-modal="{{ closeOnClickModal }}"
   bind:close="handleClose"
 >
+  <view class="calendar__header">
+    <wd-icon custom-class="calendar__close" name="add" bind:tap="handleClose"/>
+  </view>
   <view class="calendar">
-    <wd-tabs value="{{ dataType }}" bind:change="handleDataTypeChange">
+    <wd-tabs id="tabs" value="{{ dataType }}" bind:change="handleDataTypeChange">
       <wd-tab name="bill" title="账单日期" />
       <wd-tab name="arrive" title="到账日期" />
     </wd-tabs>
-    <wd-radio-group value="{{ dateType }}" cell shape="button" handle:change="handleShortcutChange">
-      <wd-radio value="{{ 3 }}">近3天</wd-radio>
-      <wd-radio value="{{ 7 }}">近7天</wd-radio>
-      <wd-radio value="{{ 30 }}">近30天</wd-radio>
+    <wd-radio-group custom-class="calendar__radio-group" value="{{ dateType }}" cell shape="button" bind:change="handleShortcutChange">
+      <wd-radio custom-class="calendar__radio" value="3">近3天</wd-radio>
+      <wd-radio custom-class="calendar__radio" value="7">近7天</wd-radio>
+      <wd-radio custom-class="calendar__radio calendar__radio--last" value="30">近30天</wd-radio>
     </wd-radio-group>
-    <wd-calendar-view type="daterange" show-panel-title="{{ false }}" handle:change="handleCalendarChange" />
+    <wd-calendar-view
+      id="calendar-view"
+      type="daterange"
+      value="{{ innerValue }}"
+      panel-height="300px"
+      show-panel-title="{{ false }}"
+      formatter="{{ formatter }}"
+      default-time="{{ defaultTime }}"
+      first-day-of-week="{{ firstDayOfWeek }}"
+      bind:change="handleCalendarChange"
+    />
     <view class="calendar__footer">
-      <wd-button block bind:click="handleConfirm">确定</wd-button>
+      <wd-button disabled="{{ btnDisabled }}" block bind:click="handleConfirm">确定</wd-button>
     </view>
   </view>
 </wd-action-sheet>

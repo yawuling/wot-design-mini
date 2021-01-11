@@ -1,0 +1,41 @@
+.calendar__radio-group {
+  margin-top: 10px !important;
+  padding: 0 15px !important;
+}
+.calendar__radio {
+  width: calc(33% - 6px) !important;
+  padding: 0 !important;
+  margin-right: 10px !important;
+}
+.calendar__radio--last {
+  margin-right: 0 !important;
+}
+.calendar__footer {
+  padding: 10px 30px 10px;
+  border-top: 1px solid rgba(220, 220, 220, 1);
+}
+.calendar__header {
+  position: relative;
+  height: 15px;
+  text-align: center;
+}
+.calendar__close {
+  position: absolute;
+  bottom: -15px;
+  right: 15px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 16px;
+  transform: rotate(-45deg);
+  line-height: 1.1;
+  z-index: 100;
+}
+@media (min-height: 568px) {
+  .calendar__footer {
+    padding: 15px 30px 20px;
+  }
+}
+@media (min-height: 700px) {
+  .calendar__footer {
+    padding: 15px 30px 30px;
+  }
+}

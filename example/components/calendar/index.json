@@ -7,6 +7,7 @@
     "wd-radio": "/wot-design/radio/index",
     "wd-calendar-view": "/wot-design/calendarView/index",
     "wd-button": "/wot-design/button/index",
-    "wd-action-sheet": "/wot-design/actionSheet/index"
+    "wd-action-sheet": "/wot-design/actionSheet/index",
+    "wd-icon": "/wot-design/icon/index"
   }
 }
