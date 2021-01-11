@@ -1,5 +1,4 @@
 <view class="wd-calendar-view">
-  {{ customMonthPanelClass }}
   <year-panel
     jd:if="{{ type === 'month' || type === 'monthrange' }}"
     id="yearPanel"
@@ -31,6 +30,7 @@
     show-panel-title="{{ showPanelTitle }}"
     default-time="{{ formatDefauleTime }}"
     panel-height="{{ panelHeight }}"
+    custom-month-panel-class="{{ customMonthPanelClass }}"
     bind:change="handleChange"
   />
 </view>
