@@ -52,16 +52,17 @@ VueComponent({
           formatDefauleTime: getDefaultTime(val)
         })
       }
-    }
+    },
+    panelHeight: String
   },
   data: {
     formatDefauleTime: []
   },
   methods: {
     // 对外暴露方法
-    scrollIntoView () {
+    scrollIntoView (thresholds) {
       const panel = this.getPanel()
-      panel.initRect && panel.initRect()
+      panel.initRect && panel.initRect(thresholds)
       panel.scrollIntoView()
     },
     getPanel () {
