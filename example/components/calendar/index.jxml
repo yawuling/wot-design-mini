@@ -1,0 +1,23 @@
+<wd-action-sheet
+  show="{{ show }}"
+  duration="{{ 250 }}"
+  title="{{ title || '日期选择' }}"
+  close-on-click-modal="{{ closeOnClickModal }}"
+  bind:close="handleClose"
+>
+  <view class="calendar">
+    <wd-tabs value="{{ dataType }}" bind:change="handleDataTypeChange">
+      <wd-tab name="bill" title="账单日期" />
+      <wd-tab name="arrive" title="到账日期" />
+    </wd-tabs>
+    <wd-radio-group value="{{ dateType }}" cell shape="button" handle:change="handleShortcutChange">
+      <wd-radio value="{{ 3 }}">近3天</wd-radio>
+      <wd-radio value="{{ 7 }}">近7天</wd-radio>
+      <wd-radio value="{{ 30 }}">近30天</wd-radio>
+    </wd-radio-group>
+    <wd-calendar-view type="daterange" show-panel-title="{{ false }}" handle:change="handleCalendarChange" />
+    <view class="calendar__footer">
+      <wd-button block bind:click="handleConfirm">确定</wd-button>
+    </view>
+  </view>
+</wd-action-sheet>

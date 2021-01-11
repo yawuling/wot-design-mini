@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wd-tabs": "/wot-design/tabs/index",
+    "wd-tab": "/wot-design/tab/index",
+    "wd-radio-group": "/wot-design/radioGroup/index",
+    "wd-radio": "/wot-design/radio/index",
+    "wd-calendar-view": "/wot-design/calendarView/index",
+    "wd-button": "/wot-design/button/index",
+    "wd-action-sheet": "/wot-design/actionSheet/index"
+  }
+}

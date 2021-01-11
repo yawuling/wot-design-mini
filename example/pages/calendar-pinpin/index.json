@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Calendar 拼拼日历组件",
+  "usingComponents": {
+    "demo-block": "../../components/demo-block/index",
+    "calendar": "../../components/calendar/index"
+  }
+}
