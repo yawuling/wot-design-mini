@@ -1,11 +1,11 @@
 import VueComponent from '../../../common/component'
-import { compareDate, compareMonth } from '../../utils'
+import { compareDate, compareMonth, getMonthOffset, getMonthByOffset, getDateByDefaultTime } from '../../utils'
 import { getType } from '../../../common/util'
+import Toast from '../../../toast/toast.js'
 
 VueComponent({
   data: {
-    months: [],
-    value: []
+    months: []
   },
   props: {
     type: {
@@ -31,7 +31,11 @@ VueComponent({
     formatter: {
       type: null,
       observer: 'setMonths'
-    }
+    },
+    maxRange: Number,
+    rangePrompt: String,
+    allowSameDay: Boolean,
+    defaultTime: Array
   },
   methods: {
     setMonths () {
@@ -40,6 +44,12 @@ VueComponent({
       const year = date.getFullYear()
 
       let value = this.data.value
+      const valueType = getType(value)
+
+      if (this.data.type.indexOf('range') > -1 && (value && valueType !== 'array')) {
+        console.error('[wot-design] value should be array when type is range')
+        return
+      }
 
       if ((this.data.type === 'week' || this.data.type === 'weekrange') && value) {
         value = this.getWeekValue()
@@ -48,12 +58,13 @@ VueComponent({
       for (let month = 0; month < 12; month++) {
         const date = new Date(year, month, 1).getTime()
         let type = this.getMonthType(date, value)
-        if ((type.length === 0) && compareMonth(date, Date.now()) === 0) {
-          type = ['is-current']
+        if (!type && compareMonth(date, Date.now()) === 0) {
+          type = 'current'
         }
         let monthObj = {
           date: date,
           text: month + 1,
+          topInfo: '',
           bottomInfo: '',
           type,
           disabled: compareMonth(date, this.data.minDate) === -1 || compareMonth(date, this.data.maxDate) === 1
@@ -77,23 +88,20 @@ VueComponent({
         const [startDate, endDate] = this.data.value || []
 
         if (startDate && compareMonth(date, startDate) === 0) {
-          const type = ['is-start']
-
-          if (!endDate || startDate === endDate) {
-            type.push('is-without-end')
+          if (this.data.allowSameDay && endDate && compareMonth(startDate, endDate) === 0) {
+            return 'same'
           }
-
-          return type
+          return 'start'
         } else if (endDate && compareMonth(date, endDate) === 0) {
-          return ['is-end']
+          return 'end'
         } else if (startDate && endDate && compareMonth(date, startDate) === 1 && compareMonth(date, endDate) === -1) {
-          return ['is-middle']
+          return 'middle'
         } else {
-          return []
+          return ''
         }
       } else {
         if (this.data.value && compareMonth(date, this.data.value) === 0) {
-          return ['is-selected']
+          return 'selected'
         } else {
           return []
         }
@@ -116,20 +124,37 @@ VueComponent({
         this.handleMonthChange(date)
       }
     },
+    getDate (date) {
+      return this.data.defaultTime && this.data.defaultTime.length > 0 ? getDateByDefaultTime(date, this.data.defaultTime[0]) : date
+    },
     handleMonthChange (date) {
-      if (date.type.indexOf('is-selected') === -1) {
+      if (date.type !== 'selected') {
         this.$emit('change', {
-          value: date.date
+          value: this.getDate(date.date)
         })
       }
     },
     handleMonthRangeChange (date) {
       let value
       const [startDate, endDate] = this.data.value || []
-      if (startDate && !endDate && compareDate(date.date, startDate) > -1) {
-        value = [startDate, date.date]
+      const compare = compareDate(date.date, startDate)
+
+      // 禁止选择同个日期
+      if (!this.data.allowSameDay && compare === 0) return
+
+      if (startDate && !endDate && compare > -1) {
+        if (this.data.maxRange && getMonthOffset(date.date, startDate) > this.data.maxRange) {
+          const maxEndDate = getMonthByOffset(startDate, this.data.maxRange - 1)
+          value = [startDate, this.getDate(maxEndDate)]
+          Toast({
+            msg: this.data.rangePrompt || `选择月份不能超过${this.data.maxRange}个月`,
+            context: this
+          })
+        } else {
+          value = [startDate, this.getDate(date.date)]
+        }
       } else {
-        value = [date.date, null]
+        value = [this.getDate(date.date), null]
       }
       this.$emit('change', {
         value
