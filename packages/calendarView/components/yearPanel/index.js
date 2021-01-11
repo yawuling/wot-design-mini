@@ -1,5 +1,5 @@
 import VueComponent from '../../../common/component'
-import { getYears, compareYear } from '../../utils'
+import { getYears, compareYear, formatYearTitle } from '../../utils'
 import { getType } from '../../../common/util'
 
 VueComponent({
@@ -13,15 +13,42 @@ VueComponent({
     formatter: null,
     maxRange: Number,
     rangePrompt: String,
-    allowSameDay: Boolean
+    allowSameDay: Boolean,
+    showPanelTitle: Boolean,
+    defaultTime: Array
   },
   data: {
+    title: '',
     scrollIntoView: ''
   },
   mounted () {
+    this.initRect()
     this.scrollIntoView()
   },
   methods: {
+    initRect () {
+      if (!this.data.showPanelTitle) return
+
+      if (this.contentObserver != null) {
+        this.contentObserver.disconnect()
+      }
+
+      const contentObserver = this.createIntersectionObserver({
+        thresholds: [0, 0.15, 0.7, 0.8, 0.9, 1],
+        observeAll: true
+      })
+
+      this.contentObserver = contentObserver
+
+      contentObserver.relativeTo('.wd-year-panel__container')
+      contentObserver.observe('.year', (res) => {
+        if (res.boundingClientRect.top <= res.relativeRect.top) {
+          this.setData({
+            title: formatYearTitle(res.dataset.date)
+          })
+        }
+      })
+    },
     scrollIntoView () {
       this.requestAnimationFrame().then(() => {
         let activeDate

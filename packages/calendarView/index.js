@@ -1,5 +1,6 @@
 import VueComponent from '../common/component'
 import { getType } from '../common/util'
+import { getDefaultTime } from './utils'
 
 const current = new Date()
 const currentYear = current.getFullYear()
@@ -39,9 +40,33 @@ VueComponent({
     formatter: null,
     maxRange: Number,
     rangePrompt: String,
-    allowSameDay: Boolean
+    allowSameDay: Boolean,
+    showPanelTitle: {
+      type: Boolean,
+      value: true
+    },
+    defaultTime: {
+      type: [String, Array],
+      observer (val) {
+        this.setData({
+          formatDefauleTime: getDefaultTime(val)
+        })
+      }
+    }
+  },
+  data: {
+    formatDefauleTime: []
   },
   methods: {
+    // 对外暴露方法
+    scrollIntoView () {
+      const panel = this.getPanel()
+      panel.initRect && panel.initRect()
+      panel.scrollIntoView()
+    },
+    getPanel () {
+      return this.data.type.indexOf('month') > -1 ? this.selectComponent('#yearPanel') : this.selectComponent('#monthPanel')
+    },
     handleChange ({ detail: { value } }) {
       this.setData({
         value

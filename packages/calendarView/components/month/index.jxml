@@ -8,11 +8,12 @@
     <view
       jd:for="{{ days }}"
       jd:key="date"
-      class="wd-month__day {{ item.disabled ? 'is-disabled' : '' }} {{ item.type ? utils.join(item.type) : '' }}"
+      class="wd-month__day {{ item.disabled ? 'is-disabled' : '' }} {{ item.type ? utils.getItemClass(item.type, value, type) : '' }}"
       style="{{ utils.getFirstDayStyle(index, item.date, firstDayOfWeek) }}"
       data-index="{{ index }}"
       catchtap="handleDateClick"
     >
+      <view class="wd-month__day-top">{{ item.topInfo }}</view>
       <view class="wd-month__day-text">
         {{ item.text }}
       </view>

@@ -36,6 +36,28 @@ function compareYear (date1, date2) {
   return year1 === year2 ? 0 : (year1 > year2 ? 1 : -1)
 }
 
+function compareDay (date1, date2) {
+  date1 = getDate(date1)
+  date2 = getDate(date2)
+
+  var year1 = date1.getFullYear()
+  var year2 = date2.getFullYear()
+  var month1 = date1.getMonth()
+  var month2 = date2.getMonth()
+  var day1 = date1.getDate()
+  var day2 = date2.getDate()
+
+  if (year1 === year2) {
+    if (month1 === month2) {
+      return day1 === day2 ? 0 : (day1 > day2 ? 1 : -1)
+    }
+
+    return month1 > month2 ? 1 : -1
+  }
+
+  return year1 > year2 ? 1 : -1
+}
+
 /**
  * 根据最小日期和最大日期获取这之间总共有几个月份
  * @param {timestamp} minDate 
@@ -118,16 +140,20 @@ function getFirstDayStyle (index, date, firstDayOfWeek) {
   return 'margin-left: ' + (100 / 7) * offset + '%'
 }
 
-/**
- * 将数组拼成字符串
- * @param {array} arr 
- */
-function join(arr) {
-  if (arr) {
-    return arr.join(' ')
-  } else {
-    return ''
+function getItemClass (monthType, value, type) {
+  var classList = [('is-' + monthType)]
+
+  if (type.indexOf('range') > -1) {
+    if (!value || !value[1]) {
+      classList.push('is-without-end')
+    } else if (value && value[0] && value[1]) {
+      if ((type === 'daterange' && compareDay(value[0], value[1]) === 0) || (type === 'monthrange' && compareMonth(value[0], value[1]) === 0)) {
+        classList.push('is-same-end')
+      }
+    }
   }
+
+  return classList.join(' ')
 }
 
 module.exports = {
@@ -135,7 +161,7 @@ module.exports = {
   getWeekLabel: getWeekLabel,
   getFirstDayStyle: getFirstDayStyle,
   formatMonthTitle: formatMonthTitle,
-  join: join,
   getYears: getYears,
-  formatYearTitle: formatYearTitle
+  formatYearTitle: formatYearTitle,
+  getItemClass: getItemClass
 }

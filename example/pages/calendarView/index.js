@@ -18,19 +18,27 @@ Page({
       const nowDa = now.getDate()
 
       if (year === nowYear && month === nowMonth && da === nowDa) {
-        day.text = '今天'
+        day.topInfo = '今天'
       }
 
       if (month === 5 && da === 18) {
-        day.bottomInfo = '618大促'
+        day.topInfo = '618大促'
       }
 
-      if (day.type.indexOf('is-start') > -1) {
+      if (month === 10 && da === 11) {
+        day.topInfo = '京东双11'
+      }
+
+      if (day.type === 'start') {
         day.bottomInfo = '开始'
       }
 
-      if (day.type.indexOf('is-end') > -1) {
+      if (day.type === 'end') {
         day.bottomInfo = '结束'
+      }
+
+      if (day.type === 'same') {
+        day.bottomInfo = '开始/结束'
       }
 
       return day
@@ -46,14 +54,19 @@ Page({
       type2: event.detail.value
     })
   },
-  handleConfirm1 (event) {
+  handleChange1 (event) {
     this.setData({
       value1: event.detail.value
     })
   },
-  handleTypeChange3 (event) {
+  handleChange2 (event) {
     this.setData({
-      type3: event.detail.value
+      value2: event.detail.value
+    })
+  },
+  handleChange3 (event) {
+    this.setData({
+      value3: event.detail.value
     })
   }
 })
