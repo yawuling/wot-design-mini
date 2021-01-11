@@ -1,6 +1,7 @@
 <view class="wd-calendar-view">
   <year-panel
     jd:if="{{ type === 'month' || type === 'monthrange' }}"
+    id="yearPanel"
     type="{{ type }}"
     value="{{ value }}"
     min-date="{{ minDate }}"
@@ -9,10 +10,13 @@
     max-range="{{ maxRange }}"
     range-prompt="{{ rangePrompt }}"
     allow-same-day="{{ allowSameDay }}"
+    show-panel-title="{{ showPanelTitle }}"
+    default-time="{{ formatDefauleTime }}"
     bind:change="handleChange"
   />
   <month-panel
     jd:else
+    id="monthPanel"
     type="{{ type }}"
     value="{{ value }}"
     min-date="{{ minDate }}"
@@ -22,6 +26,8 @@
     max-range="{{ maxRange }}"
     range-prompt="{{ rangePrompt }}"
     allow-same-day="{{ allowSameDay }}"
+    show-panel-title="{{ showPanelTitle }}"
+    default-time="{{ formatDefauleTime }}"
     bind:change="handleChange"
   />
 </view>

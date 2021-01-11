@@ -14,7 +14,9 @@ VueComponent({
     formatter: null,
     maxRange: Number,
     rangePrompt: String,
-    allowSameDay: Boolean
+    allowSameDay: Boolean,
+    showPanelTitle: Boolean,
+    defaultTime: Array
   },
   data: {
     title: '',
@@ -26,12 +28,14 @@ VueComponent({
   },
   methods: {
     initRect () {
+      if (!this.data.showPanelTitle) return
+
       if (this.contentObserver != null) {
         this.contentObserver.disconnect()
       }
 
       const contentObserver = this.createIntersectionObserver({
-        thresholds: [0, 0.1, 0.9, 1],
+        thresholds: [0, 0.15, 0.7, 0.8, 0.9, 1],
         observeAll: true
       })
 
