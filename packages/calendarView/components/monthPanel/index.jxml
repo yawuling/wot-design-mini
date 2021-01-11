@@ -5,7 +5,7 @@
   <view class="wd-month-panel__weeks">
     <view jd:for="{{ 7 }}" jd:key="*this" class="wd-month-panel__week">{{ utils.getWeekLabel(item + firstDayOfWeek) }}</view>
   </view>
-  <scroll-view class="wd-month-panel__container" scroll-y scroll-into-view="{{ scrollIntoView }}">
+  <scroll-view class="wd-month-panel__container" style="{{ panelHeight ? ('height: ' + panelHeight) : '' }}" scroll-y scroll-into-view="{{ scrollIntoView }}">
     <month
       jd:for="{{ utils.getMonths(minDate, maxDate) }}"
       jd:key="*this"

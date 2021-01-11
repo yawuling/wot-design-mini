@@ -16,7 +16,8 @@ VueComponent({
     rangePrompt: String,
     allowSameDay: Boolean,
     showPanelTitle: Boolean,
-    defaultTime: Array
+    defaultTime: Array,
+    panelHeight: String
   },
   data: {
     title: '',
@@ -27,7 +28,7 @@ VueComponent({
     this.scrollIntoView()
   },
   methods: {
-    initRect () {
+    initRect (thresholds = [0, 0.15, 0.7, 0.8, 0.9, 1]) {
       if (!this.data.showPanelTitle) return
 
       if (this.contentObserver != null) {
@@ -35,7 +36,7 @@ VueComponent({
       }
 
       const contentObserver = this.createIntersectionObserver({
-        thresholds: [0, 0.15, 0.7, 0.8, 0.9, 1],
+        thresholds,
         observeAll: true
       })
 
