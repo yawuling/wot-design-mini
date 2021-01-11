@@ -7,7 +7,7 @@
       <wd-radio value="month">month</wd-radio>
     </wd-radio-group>
   </view>
-  <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:change="handleChange1"></wd-calendar-view>
+  <wd-calendar-view  type="{{ type1 }}" value="{{ value1 }}" bind:change="handleChange1"></wd-calendar-view>
 </demo-block>
 <demo-block title="多个日期选择" hor="{{ 0 }}">
   <wd-calendar-view type="dates" value="{{ value2 }}" bind:change="handleChange2"></wd-calendar-view>
