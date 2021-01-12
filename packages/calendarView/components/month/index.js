@@ -52,6 +52,7 @@ VueComponent({
 
       if ((this.data.type === 'week' || this.data.type === 'weekrange') && value) {
         value = this.getWeekValue()
+        console.log(new Date(value[0]), new Date(value[1]))
       }
 
       for (let day = 1; day <= totalDay; day++) {
@@ -77,9 +78,9 @@ VueComponent({
       case 'daterange':
         return this.getDateRangeType(date, value)
       case 'week':
-        return this.getRangeType(date, value)
+        return this.getWeekRangeType(date, value)
       case 'weekrange':
-        return this.getRangeType(date, value)
+        return this.getWeekRangeType(date, value)
       default:
         return this.getDateType(date)
       }
@@ -124,7 +125,7 @@ VueComponent({
         return ''
       }
     },
-    getRangeType (date, value) {
+    getWeekRangeType (date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
@@ -139,15 +140,15 @@ VueComponent({
     },
     getWeekValue () {
       if (this.data.type === 'week') {
-        return getWeekRange(this.data.value)
+        return getWeekRange(this.data.value, this.data.firstDayOfWeek)
       } else {
         const [startDate, endDate] = this.data.value || []
 
         if (startDate) {
-          const firstWeekRange = getWeekRange(startDate)
+          const firstWeekRange = getWeekRange(startDate, this.data.firstDayOfWeek)
 
           if (endDate) {
-            const endWeekRange = getWeekRange(endDate)
+            const endWeekRange = getWeekRange(endDate, this.data.firstDayOfWeek)
 
             return [firstWeekRange[0], endWeekRange[1]]
           } else {
