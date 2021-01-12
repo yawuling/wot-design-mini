@@ -1,4 +1,4 @@
-<demo-block title="单个日期选择" hor="{{ 0 }}">
+<!-- <demo-block title="单个日期选择" hor="{{ 0 }}">
   <view style="margin: 0 15px 10px;">
     <view style="margin-bottom: 10px; font-size: 13px;">切换类型：</view>
     <wd-radio-group value="{{ type1 }}" shape="button" bind:change="handleTypeChange1">
@@ -28,7 +28,7 @@
 </demo-block>
 <demo-block title="自定义日期" hor="{{ 0 }}">
   <wd-calendar-view type="daterange" allow-same-day value="{{ value4 }}" formatter="{{ formatter }}"></wd-calendar-view>
-</demo-block>
+</demo-block> -->
 <demo-block title="设置周起始日" hor="{{ 0 }}">
-  <wd-calendar-view first-day-of-week="{{ 1 }}"></wd-calendar-view>
+  <wd-calendar-view type="week" first-day-of-week="{{ 3 }}" bind:change="handleTypeChange1"></wd-calendar-view>
 </demo-block>

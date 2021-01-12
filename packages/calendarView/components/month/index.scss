@@ -31,26 +31,26 @@
     }
     @include when(selected) {
       border-radius: $-calendar-active-border;
-      background-color: $-calendar-active-color;
+      background: $-calendar-active-color;
       color: #fff;
     }
     @include when(middle) {
-      background-color: $-calendar-range-color;
+      background: $-calendar-range-color;
     }
     @include when(start) {
-      background-color: $-calendar-active-color;
+      background: $-calendar-active-color;
       color: #fff;
       border-top-left-radius: $-calendar-active-border;
       border-bottom-left-radius: $-calendar-active-border;
     }
     @include when(end) {
-      background-color: $-calendar-active-color;
+      background: $-calendar-active-color;
       color: #fff;
       border-top-right-radius: $-calendar-active-border;
       border-bottom-right-radius: $-calendar-active-border;
     }
     @include when(same) {
-      background-color: $-calendar-active-color;
+      background: $-calendar-active-color;
       color: #fff;
       border-radius: $-calendar-active-border;
     }
