@@ -96,7 +96,7 @@ function getYears (minDate, maxDate) {
  */
 function getWeekLabel (index) {
   if (index > 7) {
-    index = index - 7
+    index = index % 7
   }
 
   return weeks[index - 1]

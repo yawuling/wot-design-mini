@@ -45,6 +45,7 @@ Page({
     }
   },
   handleTypeChange1 (event) {
+    console.log(new Date(event.detail.value))
     this.setData({
       type1: event.detail.value
     })
