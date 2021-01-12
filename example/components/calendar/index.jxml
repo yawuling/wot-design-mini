@@ -29,7 +29,7 @@
       bind:change="handleCalendarChange"
     />
     <view class="calendar__footer">
-      <wd-button disabled="{{ btnDisabled }}" block bind:click="handleConfirm">确定</wd-button>
+      <wd-button disabled="{{ btnDisabled }}" size="large" block bind:click="handleConfirm">确定</wd-button>
     </view>
   </view>
 </wd-action-sheet>

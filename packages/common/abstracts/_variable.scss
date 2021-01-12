@@ -259,9 +259,9 @@ $-calendar-day-color: rgba(0, 0, 0, 0.85) !default;
 $-calendar-day-fw: 500 !default;
 $-calendar-day-height: 64px !default;
 $-calendar-month-width: 50px !default;
-$-calendar-active-color: $-color-theme !default;
+$-calendar-active-color: linear-gradient(90deg, rgba(255,0,0,1) 0%,rgba(255,95,68,1) 100%) !default;
 $-calendar-disabled-color: rgba(0, 0, 0, 0.25) !default;
-$-calendar-range-color: rgba($-color-theme, 0.09) !default;
+$-calendar-range-color: rgba(255, 236, 227, 1) !default;
 $-calendar-active-border: 8px !default;
 $-calendar-info-fs: 10px !default;
 

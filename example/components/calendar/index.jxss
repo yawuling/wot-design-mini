@@ -11,7 +11,7 @@
   margin-right: 0 !important;
 }
 .calendar__footer {
-  padding: 10px 30px 10px;
+  padding: 6px 30px 6px;
   border-top: 1px solid rgba(220, 220, 220, 1);
 }
 .calendar__header {
@@ -31,7 +31,7 @@
 }
 @media (min-height: 568px) {
   .calendar__footer {
-    padding: 15px 30px 20px;
+    padding: 11px 30px 16px;
   }
 }
 @media (min-height: 700px) {
