@@ -34,11 +34,11 @@
 
       .wd-year__month-text {
         border-radius: $-calendar-active-border;
-        background-color: $-calendar-active-color;
+        background: $-calendar-active-color;
       }
     }
     @include when(middle) {
-      background-color: $-calendar-range-color;
+      background: $-calendar-range-color;
     }
     @include when(start) {
       color: #fff;
@@ -50,10 +50,10 @@
         left: 50%;
         bottom: 0;
         content: '';
-        background-color: $-calendar-range-color;
+        background: $-calendar-range-color;
       }
       .wd-year__month-text {
-        background-color: $-calendar-active-color;
+        background: $-calendar-active-color;
         border-top-left-radius: $-calendar-active-border;
         border-bottom-left-radius: $-calendar-active-border;
       }
@@ -71,10 +71,10 @@
         right: 50%;
         bottom: 0;
         content: '';
-        background-color: $-calendar-range-color;
+        background: $-calendar-range-color;
       }
       .wd-year__month-text {
-        background-color: $-calendar-active-color;
+        background: $-calendar-active-color;
         border-top-right-radius: $-calendar-active-border;
         border-bottom-right-radius: $-calendar-active-border;
       }
@@ -83,7 +83,7 @@
       color: #fff;
 
       .wd-year__month-text {
-        background-color: $-calendar-active-color;
+        background: $-calendar-active-color;
         border-radius: $-calendar-active-border;
       }
     }

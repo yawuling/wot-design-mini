@@ -52,7 +52,6 @@ VueComponent({
 
       if ((this.data.type === 'week' || this.data.type === 'weekrange') && value) {
         value = this.getWeekValue()
-        console.log(new Date(value[0]), new Date(value[1]))
       }
 
       for (let day = 1; day <= totalDay; day++) {
