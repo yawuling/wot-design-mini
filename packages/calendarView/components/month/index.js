@@ -71,10 +71,12 @@ VueComponent({
     getDayType (date, value) {
       switch (this.data.type) {
       case 'date':
+      case 'datetime':
         return this.getDateType(date)
       case 'dates':
         return this.getDatesType(date)
       case 'daterange':
+      case 'datetimerange':
         return this.getDateRangeType(date, value)
       case 'week':
         return this.getWeekRangeType(date, value)
@@ -164,12 +166,14 @@ VueComponent({
 
       switch (this.data.type) {
       case 'date':
+      case 'datetime':
         this.handleDateChange(date)
         break
       case 'dates':
         this.handleDatesChange(date)
         break
       case 'daterange':
+      case 'datetimerange':
         this.handleDateRangeChange(date)
         break
       case 'week':
@@ -192,7 +196,8 @@ VueComponent({
 
       if (date.type !== 'selected') {
         this.$emit('change', {
-          value: this.getDate(date.date)
+          value: this.getDate(date.date),
+          type: 'start'
         })
       }
     },
@@ -235,35 +240,36 @@ VueComponent({
         value = [this.getDate(date.date), null]
       }
       this.$emit('change', {
-        value
+        value,
+        type: value[1] ? 'end' : 'start'
       })
     },
     handleWeekChange (date) {
       if (date.type === 'selected' || date.type === 'middle') return
 
-      const [weekStart] = getWeekRange(date.date)
+      const [weekStart] = getWeekRange(date.date, this.data.firstDayOfWeek)
 
       // 周的第一天如果是禁用状态，则不可选中
       if (this.getFormatterDate(weekStart, new Date(weekStart).getDate()).disabled) return
 
       this.$emit('change', {
-        value: this.getDate(weekStart)
+        value: this.getDate(weekStart) + 24 * 60 * 60 * 1000
       })
     },
     handleWeekRangeChange (date) {
-      const [weekStartDate] = getWeekRange(date.date)
+      const [weekStartDate] = getWeekRange(date.date, this.data.firstDayOfWeek)
 
       // 周的第一天如果是禁用状态，则不可选中
       if (this.getFormatterDate(weekStartDate, new Date(weekStartDate).getDate()).disabled) return
 
       let value
       const [startDate, endDate] = this.data.value || []
-      const [startWeekStartDate] = startDate ? getWeekRange(startDate) : []
+      const [startWeekStartDate] = startDate ? getWeekRange(startDate, this.data.firstDayOfWeek) : []
 
       if (startDate && !endDate && compareDate(weekStartDate, startWeekStartDate) > -1) {
-        value = [this.getDate(startWeekStartDate), this.getDate(weekStartDate)]
+        value = [this.getDate(startWeekStartDate) + 24 * 60 * 60 * 1000, this.getDate(weekStartDate) + 24 * 60 * 60 * 1000]
       } else {
-        value = [this.getDate(weekStartDate), null]
+        value = [this.getDate(weekStartDate) + 24 * 60 * 60 * 1000, null]
       }
 
       this.$emit('change', {

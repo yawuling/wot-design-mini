@@ -31,7 +31,7 @@ VueComponent({
     },
     maxDate: {
       type: Number,
-      value: new Date(currentYear, currentMonth + 6, currentDay).getTime()
+      value: new Date(currentYear, currentMonth + 6, currentDay, 23, 59, 59).getTime()
     },
     firstDayOfWeek: {
       type: Number,
@@ -53,7 +53,7 @@ VueComponent({
         })
       }
     },
-    panelHeight: String
+    panelHeight: Number
   },
   data: {
     formatDefauleTime: []
