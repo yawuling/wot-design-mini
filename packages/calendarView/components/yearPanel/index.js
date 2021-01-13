@@ -16,7 +16,10 @@ VueComponent({
     allowSameDay: Boolean,
     showPanelTitle: Boolean,
     defaultTime: Array,
-    panelHeight: String
+    panelHeight: {
+      type: Number,
+      value: 342
+    }
   },
   data: {
     title: '',

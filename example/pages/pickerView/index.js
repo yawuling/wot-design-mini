@@ -12,6 +12,19 @@ const district = {
   440500: [{ label: '龙湖区', value: '440507' }, { label: '金平区', value: '440511' }]
 }
 
+const times = (n) => {
+  let index = -1
+  const result = Array(n < 0 ? 0 : n)
+  while (++index < n) {
+    result[index] = {
+      label: index,
+      value: index,
+      disabled: index < 10
+    }
+  }
+  return result
+}
+
 Page({
   data: {
     value1: '选项1',
@@ -38,6 +51,12 @@ Page({
     columns4: [
       ['中山大学', '中南大学', '华南理工大学'],
       ['计算机科学与技术', '软件工程', '通信工程', '法学', '经济学']
+    ],
+
+    columns6: [
+      times(24),
+      times(60),
+      times(60)
     ],
 
     value5: ['110000', '110100', '110102'],
