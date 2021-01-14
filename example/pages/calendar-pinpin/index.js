@@ -1,13 +1,13 @@
 Page({
   data: {
     show: false,
-    dataType: 'bill',
+    billType: 'bill',
     dateType: 'custom',
     value: [],
     formatValue: ''
   },
   handleConfirm (event) {
-    const { show, dataType, dateType, value } = event.detail
+    const { show, billType, dateType, value } = event.detail
     const start = new Date(value[0])
     const end = new Date(value[1])
 
@@ -17,7 +17,7 @@ Page({
     console.log(start, end)
     this.setData({
       show,
-      dataType,
+      billType,
       dateType,
       value,
       formatValue: `${startStr}-${endStr}`

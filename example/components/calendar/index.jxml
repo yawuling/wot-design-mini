@@ -8,7 +8,7 @@
     <wd-icon custom-class="calendar__close" name="add" bind:tap="handleClose"/>
   </view>
   <view class="calendar">
-    <wd-tabs jd:if="{{ showBill }}" id="tabs" value="{{ dataType }}" bind:change="handleDataTypeChange">
+    <wd-tabs jd:if="{{ showBill }}" id="tabs" value="{{ billType }}" bind:change="handleBillTypeChange">
       <wd-tab name="bill" title="账单日期" />
       <wd-tab name="arrive" title="到账日期" />
     </wd-tabs>

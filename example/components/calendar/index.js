@@ -2,8 +2,10 @@
  * 组件用法
  *   属性                    说明                        类型            可选值             默认值
  *   show                   是否展示                     boolean         -                false
- *   dataType               日期类型，’bill‘ 账单日期，    string          ’arrive'         'bill'
+ *   showBill               是否展示账单                  boolean         -                false
+ *   billType               账单类型，’bill‘ 账单日期，    string          ’arrive'         'bill'
  *                          'arrive' 到账日期
+ *   showShortcut           是否展示快捷方式               boolean         -                fasle
  *   dateType               快捷类型，'3' 近3天，'7' 近    string          '3', '7', '30'   'custom'
  *                          7天，'30' 近30天，'custom'
  *                          自由选择
@@ -13,31 +15,33 @@
  *   formatter              格式化日期展示                function        -                 -
  *   default-time           日期时间                     array           -                 ['00:00:00', '00:00:00']
  *   first-day-of-week      周起始天                     number          -                 7
+ *   min-date               最小时间，13位时间戳           number          -                 当前日期往前推6个月
+ *   max-date               最大时间，13位时间戳           number          -                 当前日期往后推6个月
  *
  *
  *  事件                      说明                       参数
- *  bind:confirm             点击确定按钮触发              event.detail = { show, dataType, dateType, value }
+ *  bind:confirm             点击确定按钮触发              event.detail = { show, billType, dateType, value }
  *  bind:close               点击蒙层或者关闭按钮时触发     -
- *  bind:datatypechange      切换 tabs 时触发             event.detail = { dataType }
+ *  bind:billTypechange      切换 tabs 时触发             event.detail = { billType }
  *  bind:datetypechange      切换日期选项时触发            event.detail = { dateType }
  *  bind:select              点击日期时触发               event.detail = { value }
  *
  *  一般只需要用到 bind:confirm 事件即可。
  *
- *  <calendaar show="{{ show }}" data-type="{{ dataType }}" date-type="{{ dateType }}" value="{{ value }}" bind:confirm="{{ handleConfirm }}" />
+ *  <calendar show="{{ show }}" show-bill show-shortcut bill-type="{{ billType }}" date-type="{{ dateType }}" value="{{ value }}" bind:confirm="handleConfirm" />
  *
  *  Page({
  *    data: {
  *      show: false,
- *      dataType: 'bill',
+ *      billType: 'bill',
  *      dateType: 'custom',
  *      value: []
  *    },
  *    handleConfirm (event) {
- *      const { show, dataType, dateType, value } = event.detail
+ *      const { show, billType, dateType, value } = event.detail
  *      this.setData({
  *        show,
- *        dataType,
+ *        billType,
  *        dateType,
  *        value
  *      })
@@ -60,9 +64,9 @@ Component({
       observer (val) {
         if (val) {
           // 记录原来的值，如果用户没点击确定按钮，则将数据还原
-          const { dataType, dateType, value } = this.data
+          const { billType, dateType, value } = this.data
           this.setData({
-            lastDataType: dataType,
+            lastbillType: billType,
             lastDateType: dateType,
             lastValue: value.slice(0)
           })
@@ -79,7 +83,7 @@ Component({
       }
     },
     showBill: Boolean,
-    dataType: {
+    billType: {
       type: String,
       value: 'bill'
     },
@@ -133,7 +137,7 @@ Component({
   },
   data: {
     innerValue: [],
-    lastDataType: '',
+    lastbillType: '',
     lastDateType: '',
     lastValue: '',
     btnDisabled: true,
@@ -142,7 +146,6 @@ Component({
   methods: {
     // 设置按钮禁用，只有 dateType 为 custom 且其值不完整时禁用
     setBtnDisabled () {
-      console.log(this.data.type.indexOf('range') === -1 && !this.data.innerValue)
       const rangeDisabled = this.data.type.indexOf('range') > -1 &&
         (!this.data.innerValue || !this.data.innerValue.length || !this.data.innerValue[0] || !this.data.innerValue[1])
       const singleDisabled = this.data.type.indexOf('range') === -1 && !this.data.innerValue
@@ -158,20 +161,20 @@ Component({
       this.triggerEvent('close')
       setTimeout(() => {
         // 未点击确定就关闭，还原为原来的值
-        const { lastDataType, lastDateType, lastValue } = this.data
+        const { lastbillType, lastDateType, lastValue } = this.data
         this.setData({
-          dataType: lastDataType,
+          billType: lastbillType,
           dateType: lastDateType,
           value: lastValue
         })
       }, 250)
     },
-    handleDataTypeChange ({ detail: { name } }) {
+    handleBillTypeChange ({ detail: { name } }) {
       this.setData({
-        dataType: name
+        billType: name
       })
-      this.triggerEvent('datatypechange', {
-        dataType: name
+      this.triggerEvent('billtypechange', {
+        billType: name
       })
     },
     handleShortcutChange ({ detail: { value } }) {
@@ -236,7 +239,7 @@ Component({
       this.setData({
         show: false
       })
-      const { dataType, dateType } = this.data
+      const { billType, dateType } = this.data
 
       let value = this.data.innerValue
 
@@ -252,7 +255,7 @@ Component({
 
       this.triggerEvent('confirm', {
         show: false,
-        dataType: dataType,
+        billType: billType,
         dateType: dateType,
         value
       })
