@@ -1,4 +1,4 @@
-import { getType } from '../common/util'
+import { getType, padZero } from '../common/util'
 
 /**
  * 比较两个时间的日期是否相等
@@ -137,7 +137,11 @@ export function getYears (minDate, maxDate) {
  * 获取一个日期所在周的第一天和最后一天
  * @param {timestamp} date
  */
-export function getWeekRange (date) {
+export function getWeekRange (date, firstDayOfWeek) {
+  if (firstDayOfWeek >= 7) {
+    firstDayOfWeek = firstDayOfWeek % 7
+  }
+
   date = new Date(date)
   date.setHours(0, 0, 0, 0)
   const year = date.getFullYear()
@@ -145,8 +149,10 @@ export function getWeekRange (date) {
   const day = date.getDate()
   const week = date.getDay()
 
-  const weekStart = new Date(year, month, day - week)
-  const weekEnd = new Date(year, month, day + 6 - week)
+  const weekStart = new Date(year, month, day - (7 + week - firstDayOfWeek) % 7)
+  const weekEnd = new Date(year, month, day + 6 - (7 + week - firstDayOfWeek) % 7)
+
+  console.log(weekStart, weekEnd)
 
   return [weekStart.getTime(), weekEnd.getTime()]
 }
@@ -218,4 +224,83 @@ export function getDateByDefaultTime (date, defaultTime) {
   date.setSeconds(defaultTime[2])
 
   return date.getTime()
+}
+
+const times = (n, iteratee) => {
+  let index = -1
+  const result = Array(n < 0 ? 0 : n)
+  while (++index < n) {
+    result[index] = iteratee(index)
+  }
+  return result
+}
+
+const getTime = (date) => {
+  date = new Date(date)
+  return [date.getHours(), date.getMinutes(), date.getSeconds()]
+}
+
+export function getTimeData (date, minDate, maxDate) {
+  const compareMin = compareDate(date, minDate)
+  const compareMax = compareDate(date, maxDate)
+
+  let minHour = 0
+  let maxHour = 23
+  let minMinute = 0
+  let maxMinute = 59
+  let minSecond = 0
+  let maxSecond = 59
+
+  if (compareMin === 0) {
+    const minTime = getTime(minDate)
+    const currentTime = getTime(date)
+
+    minHour = minTime[0]
+    if (minTime[0] === currentTime[0]) {
+      minMinute = minTime[1]
+
+      if (minTime[1] === currentTime[1]) {
+        minSecond = minTime[2]
+      }
+    }
+  }
+
+  if (compareMax === 0) {
+    const maxTime = getTime(maxDate)
+    const currentTime = getTime(date)
+
+    maxHour = maxTime[0]
+    if (maxTime[0] === currentTime[0]) {
+      maxMinute = maxTime[1]
+
+      if (maxTime[1] === currentTime[1]) {
+        maxSecond = maxTime[2]
+      }
+    }
+  }
+
+  const columns = []
+  columns.push(times(24, index => {
+    return {
+      label: padZero(index),
+      value: index,
+      disabled: index < minHour || index > maxHour
+    }
+  }))
+  columns.push(times(60, index => {
+    return {
+      label: padZero(index),
+      value: index,
+      disabled: index < minMinute || index > maxMinute
+    }
+  }))
+  columns.push(times(60, index => {
+    return {
+      label: padZero(index),
+      value: index,
+      disabled: index < minSecond || index > maxSecond
+    }
+  }))
+
+  return columns
 }

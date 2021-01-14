@@ -1,11 +1,18 @@
 <jds src="../../utils.jds" module="utils" />
 
 <view class="wd-month-panel">
-  <view jd:if="{{ showPanelTitle }}" class="wd-month-panel__title">{{ title }}</view>
+  <view jjd:if="{{ showPanelTitle }}" class="wd-month-panel__title">
+    {{ title }}
+  </view>
   <view class="wd-month-panel__weeks">
     <view jd:for="{{ 7 }}" jd:key="*this" class="wd-month-panel__week">{{ utils.getWeekLabel(item + firstDayOfWeek) }}</view>
   </view>
-  <scroll-view class="wd-month-panel__container" style="{{ panelHeight ? ('height: ' + panelHeight) : '' }}" scroll-y scroll-into-view="{{ scrollIntoView }}">
+  <scroll-view
+    class="wd-month-panel__container {{ !!timeType ? 'wd-month-panel__container--time' : '' }}"
+    style="height: {{ !!timeType ? ((panelHeight || 378) - 107) : (panelHeight || 378) }}px"
+    scroll-y
+    scroll-into-view="{{ scrollIntoView }}"
+  >
     <month
       jd:for="{{ utils.getMonths(minDate, maxDate) }}"
       jd:key="*this"
@@ -26,4 +33,14 @@
       bind:change="handleDateChange"
     />
   </scroll-view>
+<<<<<<< HEAD
+=======
+  <wd-picker-view
+    jd:if="{{ !!timeType }}"
+    value="{{ timeValue }}"
+    columns="{{ timeData }}"
+    columns-height="{{ 107 }}"
+    bind:change="handleTimeChange"
+  />
+>>>>>>> b6930d2f983cf9953b9f82fa2b1dbfae74472ce0
 </view>

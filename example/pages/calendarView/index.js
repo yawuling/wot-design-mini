@@ -2,6 +2,7 @@ Page({
   data: {
     type1: 'date',
     type2: 'daterange',
+    minDate: Date.now(),
     value1: Date.now(),
     value2: [Date.now(), Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() + 24 * 60 * 60 * 1000 * 3],
     value3: [Date.now() - 24 * 60 * 60 * 1000 * 33, Date.now()],
@@ -45,7 +46,6 @@ Page({
     }
   },
   handleTypeChange1 (event) {
-    console.log(new Date(event.detail.value))
     this.setData({
       type1: event.detail.value
     })
