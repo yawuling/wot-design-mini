@@ -44,8 +44,17 @@
  *    }
  *  })
  */
+const current = new Date()
+const currentYear = current.getFullYear()
+const currentMonth = current.getMonth()
+const currentDay = current.getDate()
+
 Component({
   properties: {
+    type: {
+      type: String,
+      value: 'daterange'
+    },
     show: {
       type: Boolean,
       observer (val) {
@@ -59,25 +68,37 @@ Component({
           })
           // 延迟更新tab的下划线，以及 calendarView 滚动到当前日期或者选中的日期
           setTimeout(() => {
-            const tabs = this.selectComponent('#tabs')
-            tabs.updateLineStyle(false)
+            if (this.data.showBill) {
+              const tabs = this.selectComponent('#tabs')
+              tabs.updateLineStyle(false)
+            }
             const calendarView = this.selectComponent('#calendar-view')
             calendarView.scrollIntoView()
           }, 200)
         }
       }
     },
+    showBill: Boolean,
     dataType: {
       type: String,
       value: 'bill'
     },
+    showShortcut: Boolean,
     dateType: {
       type: String,
       value: 'custom',
       observer: 'setBtnDisabled'
     },
+    minDate: {
+      type: Number,
+      value: new Date(currentYear, currentMonth - 6, currentDay).getTime()
+    },
+    maxDate: {
+      type: Number,
+      value: new Date(currentYear, currentMonth + 6, currentDay, 23, 59, 59).getTime()
+    },
     value: {
-      type: Array,
+      type: [null, Number, Array],
       observer (val) {
         if (this.data.dateType === 'custom') {
           this.setData({
@@ -121,8 +142,13 @@ Component({
   methods: {
     // 设置按钮禁用，只有 dateType 为 custom 且其值不完整时禁用
     setBtnDisabled () {
+      console.log(this.data.type.indexOf('range') === -1 && !this.data.innerValue)
+      const rangeDisabled = this.data.type.indexOf('range') > -1 &&
+        (!this.data.innerValue || !this.data.innerValue.length || !this.data.innerValue[0] || !this.data.innerValue[1])
+      const singleDisabled = this.data.type.indexOf('range') === -1 && !this.data.innerValue
+
       this.setData({
-        btnDisabled: this.data.dateType === 'custom' && (!this.data.innerValue || !this.data.innerValue.length || !this.data.innerValue[0] || !this.data.innerValue[1])
+        btnDisabled: this.data.dateType === 'custom' && (rangeDisabled || singleDisabled)
       })
     },
     handleClose () {

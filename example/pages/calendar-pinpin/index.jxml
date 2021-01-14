@@ -4,8 +4,6 @@
 </demo-block>
 <calendar
   show="{{ show }}"
-  data-type="{{ dataType }}"
-  date-type="{{ dateType }}"
   value="{{ value }}"
   default-time="{{ ['00:00:00', '23:59:59'] }}"
   bind:confirm="handleConfirm"

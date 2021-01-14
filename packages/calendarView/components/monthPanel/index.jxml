@@ -33,8 +33,6 @@
       bind:change="handleDateChange"
     />
   </scroll-view>
-<<<<<<< HEAD
-=======
   <wd-picker-view
     jd:if="{{ !!timeType }}"
     value="{{ timeValue }}"
@@ -42,5 +40,4 @@
     columns-height="{{ 107 }}"
     bind:change="handleTimeChange"
   />
->>>>>>> b6930d2f983cf9953b9f82fa2b1dbfae74472ce0
 </view>
