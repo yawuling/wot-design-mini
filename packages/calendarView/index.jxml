@@ -30,6 +30,8 @@
     show-panel-title="{{ showPanelTitle }}"
     default-time="{{ formatDefauleTime }}"
     panel-height="{{ panelHeight }}"
+    time-filter="{{ timeFilter }}"
+    hide-second="{{ hideSecond }}"
     custom-month-panel-class="{{ customMonthPanelClass }}"
     bind:change="handleChange"
   />

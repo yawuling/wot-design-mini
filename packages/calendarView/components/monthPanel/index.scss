@@ -26,4 +26,16 @@
   @include e(container) {
     height: 378px;
   }
+  @include e(time) {
+    display: flex;
+  }
+  @include e(time-label) {
+    flex: 1;
+    font-size: 14px;
+    text-align: center;
+    line-height: 107px;
+  }
+  @include e(time-picker) {
+    flex: 3;
+  }
 }

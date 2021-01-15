@@ -6,7 +6,8 @@ import Toast from '../../../toast/toast.js'
 VueComponent({
   data: {
     days: [],
-    value: []
+    value: [],
+    rangeType: 'start'
   },
   props: {
     type: {
@@ -187,9 +188,15 @@ VueComponent({
       }
     },
     getDate (date, isEnd) {
-      return this.data.defaultTime && this.data.defaultTime.length > 0
+      date = this.data.defaultTime && this.data.defaultTime.length > 0
         ? getDateByDefaultTime(date, isEnd ? this.data.defaultTime[1] : this.data.defaultTime[0])
         : date
+
+      if (date < this.data.minDate) return this.data.minDate
+
+      if (date > this.data.maxDate) return this.data.maxDate
+
+      return date
     },
     handleDateChange (date) {
       if (date.disabled) return
@@ -218,11 +225,14 @@ VueComponent({
       if (date.disabled) return
 
       let value
+      let type
       const [startDate, endDate] = this.data.value || []
       const compare = compareDate(date.date, startDate)
 
       // 禁止选择同个日期
-      if (!this.data.allowSameDay && compare === 0) return
+      if (!this.data.allowSameDay && compare === 0 && (this.data.type === 'datetime' || (this.data.type === 'datetimerange' && !endDate))) {
+        return
+      }
 
       if (startDate && !endDate && compare > -1) {
         // 不能选择超过最大范围的日期
@@ -236,12 +246,30 @@ VueComponent({
         } else {
           value = [startDate, this.getDate(date.date, true)]
         }
+      } else if (this.data.type === 'datetimerange' && startDate && endDate) {
+        // 时间范围类型，且有开始时间和结束时间，需要支持重新点击开始日期和结束日期可以重新修改时间
+        if (compare === 0 && this.data.rangeType !== 'start') {
+          type = 'start'
+          value = this.data.value
+        } else if (compareDate(date.date, endDate) === 0) {
+          type = 'end'
+          value = this.data.value
+        } else {
+          value = [this.getDate(date.date), null]
+        }
       } else {
         value = [this.getDate(date.date), null]
       }
+      if (this.data.type === 'datetimerange') {
+        // 记录范围 type 类型，用于选择同一天的情况下可以知道下面的时间picker是展示开始时间还是结束时间
+        this.setData({
+          rangeType: type || (value[1] ? 'end' : 'start')
+        })
+      }
+
       this.$emit('change', {
         value,
-        type: value[1] ? 'end' : 'start'
+        type: type || (value[1] ? 'end' : 'start')
       })
     },
     handleWeekChange (date) {

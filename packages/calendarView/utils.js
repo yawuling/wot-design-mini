@@ -178,6 +178,11 @@ export function getDayByOffset (date, offset) {
   return date.getTime()
 }
 
+/**
+ * 获取月份偏移量
+ * @param {timestamp} date1
+ * @param {timestamp} date2
+ */
 export function getMonthOffset (date1, date2) {
   date1 = new Date(date1)
   date2 = new Date(date2)
@@ -192,6 +197,11 @@ export function getMonthOffset (date1, date2) {
   return month1 - month2 + 1
 }
 
+/**
+ * 获取偏移月份
+ * @param {timestamp} date
+ * @param {number} offset
+ */
 export function getMonthByOffset (date, offset) {
   date = new Date(date)
   date.setMonth(date.getMonth() + offset)
@@ -199,6 +209,10 @@ export function getMonthByOffset (date, offset) {
   return date.getTime()
 }
 
+/**
+ * 获取默认时间，格式化为数组
+ * @param {array|string|null} defaultTime
+ */
 export function getDefaultTime (defaultTime) {
   if (getType(defaultTime) === 'array') {
     const startTime = (defaultTime[0] || '00:00:00').split(':').map(item => {
@@ -216,16 +230,11 @@ export function getDefaultTime (defaultTime) {
     return [time, time]
   }
 }
-
-export function getDateByDefaultTime (date, defaultTime) {
-  date = new Date(date)
-  date.setHours(defaultTime[0])
-  date.setMinutes(defaultTime[1])
-  date.setSeconds(defaultTime[2])
-
-  return date.getTime()
-}
-
+/**
+ * 获取经过 iteratee 格式化后的长度为 n 的数组
+ * @param {number} n
+ * @param {function} iteratee
+ */
 const times = (n, iteratee) => {
   let index = -1
   const result = Array(n < 0 ? 0 : n)
@@ -235,12 +244,20 @@ const times = (n, iteratee) => {
   return result
 }
 
+/**
+ * 获取时分秒
+ * @param {timestamp}} date
+ */
 const getTime = (date) => {
   date = new Date(date)
   return [date.getHours(), date.getMinutes(), date.getSeconds()]
 }
 
-export function getTimeData (date, minDate, maxDate) {
+/**
+ * 根据最小最大日期获取时间数据，用于填入picker
+ * @param {*} param0
+ */
+export function getTimeData ({ date, minDate, maxDate, isHideSecond, filter } = {}) {
   const compareMin = compareDate(date, minDate)
   const compareMax = compareDate(date, maxDate)
 
@@ -279,28 +296,50 @@ export function getTimeData (date, minDate, maxDate) {
     }
   }
 
-  const columns = []
-  columns.push(times(24, index => {
+  let columns = []
+  let hours = times(24, index => {
     return {
-      label: padZero(index),
+      label: `${padZero(index)}时`,
       value: index,
       disabled: index < minHour || index > maxHour
     }
-  }))
-  columns.push(times(60, index => {
+  })
+  let minutes = times(60, index => {
     return {
-      label: padZero(index),
+      label: `${padZero(index)}分`,
       value: index,
       disabled: index < minMinute || index > maxMinute
     }
-  }))
-  columns.push(times(60, index => {
-    return {
-      label: padZero(index),
-      value: index,
-      disabled: index < minSecond || index > maxSecond
+  })
+  let seconds
+  if (filter && getType(filter) === 'function') {
+    hours = filter({
+      type: 'hour',
+      values: hours
+    })
+    minutes = filter({
+      type: 'minute',
+      values: minutes
+    })
+  }
+
+  if (!isHideSecond) {
+    seconds = times(60, index => {
+      return {
+        label: `${padZero(index)}秒`,
+        value: index,
+        disabled: index < minSecond || index > maxSecond
+      }
+    })
+    if (filter && getType(filter) === 'function') {
+      seconds = filter({
+        type: 'second',
+        values: seconds
+      })
     }
-  }))
+  }
+
+  columns = isHideSecond ? [hours, minutes] : [hours, minutes, seconds]
 
   return columns
 }

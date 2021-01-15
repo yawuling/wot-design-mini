@@ -33,11 +33,17 @@
       bind:change="handleDateChange"
     />
   </scroll-view>
-  <wd-picker-view
-    jd:if="{{ !!timeType }}"
-    value="{{ timeValue }}"
-    columns="{{ timeData }}"
-    columns-height="{{ 107 }}"
-    bind:change="handleTimeChange"
-  />
+  <view jd:if="{{ !!timeType }}" class="wd-month-panel__time">
+    <view jd:if="{{ type === 'datetimerange' }}" class="wd-month-panel__time-label">
+      {{ timeType === 'start' ? '开始时间' : '结束时间' }}
+    </view>
+    <view class="wd-month-panel__time-picker">
+      <wd-picker-view
+        value="{{ timeValue }}"
+        columns="{{ timeData }}"
+        columns-height="{{ 107 }}"
+        bind:change="handleTimeChange"
+      />
+    </view>
+  </view>
 </view>
