@@ -10,7 +10,7 @@
   <wd-calendar-view type="{{ type1 }}" value="{{ value1 }}" bind:change="handleChange1"></wd-calendar-view>
 </demo-block> -->
 <demo-block title="多个日期选择" hor="{{ 0 }}">
-  <wd-calendar-view type="datetimerange" allow-same-day value="{{ value2 }}" formatter="{{ formatter }}" default-time="12:00:00" min-date="{{ minDate }}" bind:change="handleChange2"></wd-calendar-view>
+  <wd-calendar-view type="datetime" value="{{ value2 }}" min-date="{{ minDate }}" bind:change="handleChange2"></wd-calendar-view>
 </demo-block>
 <!-- <demo-block title="日期范围选择" hor="{{ 0 }}">
   <view style="margin: 0 15px 10px;">

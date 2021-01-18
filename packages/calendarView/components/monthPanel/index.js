@@ -33,7 +33,7 @@ VueComponent({
     this.scrollIntoView()
   },
   methods: {
-    initRect (thresholds = [0, 0.15, 0.7, 0.8, 0.9, 1]) {
+    initRect (thresholds = [0, 0.7, 0.8, 0.9, 1]) {
       if (!this.data.showPanelTitle) return
 
       if (this.contentObserver != null) {
@@ -153,6 +153,9 @@ VueComponent({
           timeData: this.getTimeData(value, type),
           timeValue: this.getTimeValue(value, type),
           timeType: type
+        }, () => {
+          // 重新设置 thresholds
+          this.initRect([0, 0.58, 0.69, 0.83, 1])
         })
       }
     },

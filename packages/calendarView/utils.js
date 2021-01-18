@@ -230,6 +230,21 @@ export function getDefaultTime (defaultTime) {
     return [time, time]
   }
 }
+
+/**
+ * 根据默认时间获取日期
+ * @param {timestamp} date
+ * @param {array} defaultTime
+ */
+export function getDateByDefaultTime (date, defaultTime) {
+  date = new Date(date)
+  date.setHours(defaultTime[0])
+  date.setMinutes(defaultTime[1])
+  date.setSeconds(defaultTime[2])
+
+  return date.getTime()
+}
+
 /**
  * 获取经过 iteratee 格式化后的长度为 n 的数组
  * @param {number} n
