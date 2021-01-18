@@ -1,6 +1,6 @@
 import VueComponent from '../../../common/component'
-import { formatMonthTitle, getMonths, compareMonth, getTimeData, compareDate } from '../../utils'
-import { getType, debounce } from '../../../common/util'
+import { formatMonthTitle, getMonths, compareMonth, getTimeData } from '../../utils'
+import { getType, debounce, isEqual } from '../../../common/util'
 
 VueComponent({
   props: {
@@ -17,7 +17,9 @@ VueComponent({
     allowSameDay: Boolean,
     showPanelTitle: Boolean,
     defaultTime: Array,
-    panelHeight: Number
+    panelHeight: Number,
+    timeFilter: null,
+    hideSecond: Boolean
   },
   data: {
     title: '',
@@ -31,7 +33,7 @@ VueComponent({
     this.scrollIntoView()
   },
   methods: {
-    initRect (thresholds = [0, 0.15, 0.7, 0.8, 0.9, 1]) {
+    initRect (thresholds = [0, 0.7, 0.8, 0.9, 1]) {
       if (!this.data.showPanelTitle) return
 
       if (this.contentObserver != null) {
@@ -82,71 +84,82 @@ VueComponent({
         })
       })
     },
+    /**
+     * 获取时间 picker 的数据
+     * @param {timestamp|array} value 当前时间
+     * @param {string} type 类型，是开始还是结束
+     */
     getTimeData (value, type) {
       if (this.data.type === 'datetime') {
-        return getTimeData(value, this.data.minDate, this.data.maxDate)
+        return getTimeData({
+          date: value,
+          minDate: this.data.minDate,
+          maxDate: this.data.maxDate,
+          filter: this.data.timeFilter,
+          isHideSecond: this.data.hideSecond
+        })
       } else {
         if (type === 'start') {
-          return getTimeData(this.data.minDate, this.data.value[1] ? this.data.value[1] : this.data.minDate)
+          return getTimeData({
+            date: value[0],
+            minDate: this.data.minDate,
+            maxDate: this.data.value[1] ? this.data.value[1] : this.data.maxDate,
+            filter: this.data.timeFilter,
+            isHideSecond: this.data.hideSecond
+          })
         } else {
-          return getTimeData(this.data.value[0], this.data.maxDate)
+          return getTimeData({
+            date: value[1],
+            minDate: value[0],
+            maxDate: this.data.maxDate,
+            filter: this.data.timeFilter,
+            isHideSecond: this.data.hideSecond
+          })
         }
       }
     },
+    /**
+     * 获取 date 的时分秒
+     * @param {timestamp} date 时间
+     * @param {string} type 类型，是开始还是结束
+     */
     getTimeValue (date, type) {
       if (this.data.type === 'datetime') {
-        if (compareDate(date, this.data.minDate) === 0) {
-          const minDate = new Date(this.data.minDate)
-          return [minDate.getHours(), minDate.getMinutes(), minDate.getSeconds()]
-        } else if (this.data.defaultTime.length) {
-          const [startTime] = this.data.defaultTime
-          return startTime
-        } else {
-          return []
-        }
+        date = new Date(date)
       } else {
-        const [start, end] = date
         if (type === 'start') {
-          if (compareDate(start, this.data.minDate) === 0) {
-            const minDate = new Date(this.data.minDate)
-            return [minDate.getHours(), minDate.getMinutes(), minDate.getSeconds()]
-          } else if (this.data.defaultTime.length) {
-            const [startTime] = this.data.defaultTime
-            return startTime
-          } else {
-            return []
-          }
+          date = new Date(date[0])
         } else {
-          if (compareDate(end, start) === 0) {
-            const minDate = new Date(start)
-            return [minDate.getHours(), minDate.getMinutes(), minDate.getSeconds()]
-          } else if (compareDate(end, this.data.maxDate) === 0) {
-            const maxDate = new Date(this.data.maxDate)
-            return [maxDate.getHours(), maxDate.getMinutes(), maxDate.getSeconds()]
-          } else if (this.data.defaultTime.length) {
-            return this.data.defaultTime[1]
-          } else {
-            return []
-          }
+          date = new Date(date[1])
         }
       }
+
+      const hour = date.getHours()
+      const minute = date.getMinutes()
+      const second = date.getSeconds()
+
+      return this.data.hideSecond ? [hour, minute] : [hour, minute, second]
     },
     handleDateChange ({ detail: { value, type } }) {
-      this.setData({
-        value
-      })
-      this.handleChange(value)
+      if (!isEqual(value, this.data.value)) {
+        this.setData({
+          value
+        })
+        this.handleChange(value)
+      }
       // datetime 和 datetimerange 类型，需要计算 timeData 并做展示
       if (this.data.type.indexOf('time') > -1) {
         this.setData({
-          timeData: this.getTimeData(value),
+          timeData: this.getTimeData(value, type),
           timeValue: this.getTimeValue(value, type),
           timeType: type
+        }, () => {
+          // 重新设置 thresholds
+          this.initRect([0, 0.58, 0.69, 0.83, 1])
         })
       }
     },
     handleChange (value) {
-      // console.log(new Date(value))
       this.$emit('change', {
         value
       })
@@ -158,15 +171,13 @@ VueComponent({
         const date = new Date(this.data.value)
         date.setHours(value[0])
         date.setMinutes(value[1])
-        date.setSeconds(value[2])
+        date.setSeconds(this.data.hideSecond ? 0 : value[2])
         const dateTime = date.getTime()
 
         this.setData({
           timeData: this.getTimeData(dateTime),
           timeValue: value
         })
-        console.log(value)
-        console.log(new Date(dateTime))
         this.handleChange(dateTime)
       } else {
         const [start, end] = this.data.value
@@ -174,7 +185,7 @@ VueComponent({
         const date = new Date(dataValue)
         date.setHours(value[0])
         date.setMinutes(value[1])
-        date.setSeconds(value[2])
+        date.setSeconds(this.data.hideSecond ? 0 : value[2])
         const dateTime = date.getTime()
 
         if (dateTime === dataValue) return
@@ -187,7 +198,7 @@ VueComponent({
         }
 
         this.setData({
-          timeData: this.getTimeData(dateTime),
+          timeData: this.getTimeData(finalValue, this.data.timeType),
           timeValue: value
         })
 

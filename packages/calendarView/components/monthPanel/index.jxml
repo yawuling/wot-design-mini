@@ -9,7 +9,7 @@
   </view>
   <scroll-view
     class="wd-month-panel__container {{ !!timeType ? 'wd-month-panel__container--time' : '' }}"
-    style="height: {{ !!timeType ? ((panelHeight || 378) - 107) : (panelHeight || 378) }}px"
+    style="height: {{ !!timeType ? ((panelHeight || 378) - 125) : (panelHeight || 378) }}px"
     scroll-y
     scroll-into-view="{{ scrollIntoView }}"
   >
@@ -33,11 +33,17 @@
       bind:change="handleDateChange"
     />
   </scroll-view>
-  <wd-picker-view
-    jd:if="{{ !!timeType }}"
-    value="{{ timeValue }}"
-    columns="{{ timeData }}"
-    columns-height="{{ 107 }}"
-    bind:change="handleTimeChange"
-  />
+  <view jd:if="{{ !!timeType }}" class="wd-month-panel__time">
+    <view jd:if="{{ type === 'datetimerange' }}" class="wd-month-panel__time-label">
+      <view class="wd-month-panel__time-text">{{ timeType === 'start' ? '开始' : '结束' }}</view>
+    </view>
+    <view class="wd-month-panel__time-picker">
+      <wd-picker-view
+        value="{{ timeValue }}"
+        columns="{{ timeData }}"
+        columns-height="{{ 125 }}"
+        bind:change="handleTimeChange"
+      />
+    </view>
+  </view>
 </view>

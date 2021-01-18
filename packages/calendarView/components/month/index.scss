@@ -40,20 +40,47 @@
     @include when(start) {
       background: $-calendar-active-color;
       color: #fff;
-      border-top-left-radius: $-calendar-active-border;
-      border-bottom-left-radius: $-calendar-active-border;
+      border-radius: $-calendar-active-border;
+
+      &::after {
+        position: absolute;
+        content: '';
+        height: $-calendar-day-height;
+        top: 0;
+        right: 0;
+        left: 50%;
+        background: $-calendar-range-color;
+        z-index: 0;
+      }
+      &.is-without-end::after {
+        display: none;
+      }
     }
     @include when(end) {
       background: $-calendar-active-color;
       color: #fff;
-      border-top-right-radius: $-calendar-active-border;
-      border-bottom-right-radius: $-calendar-active-border;
+      border-radius: $-calendar-active-border;
+
+      &::after {
+        position: absolute;
+        content: '';
+        height: $-calendar-day-height;
+        top: 0;
+        left: 0;
+        right: 50%;
+        background: $-calendar-range-color;
+        z-index: 0;
+      }
     }
     @include when(same) {
       background: $-calendar-active-color;
       color: #fff;
       border-radius: $-calendar-active-border;
     }
+  }
+  @include e(day-container) {
+    position: relative;
+    z-index: 1;
   }
   @include e(day-text) {
     font-weight: $-calendar-day-fw;

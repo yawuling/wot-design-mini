@@ -53,7 +53,9 @@ VueComponent({
         })
       }
     },
-    panelHeight: Number
+    panelHeight: Number,
+    timeFilter: null,
+    hideSecond: Boolean
   },
   data: {
     formatDefauleTime: []

@@ -16,7 +16,7 @@ Page({
   data: {
     columns0: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
 
-    value1: '选项3',
+    value1: '',
     columns1: ['选项1', '选项2', '选项3', '选项4', '选项5', '选项6', '选项7'],
 
     value2: '选项4',
@@ -85,5 +85,12 @@ Page({
     this.setData({
       value8: value
     })
+  },
+  onLoad () {
+    setTimeout(() => {
+      this.setData({
+        value1: '选项3'
+      })
+    }, 1000)
   }
 })

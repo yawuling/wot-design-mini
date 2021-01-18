@@ -4,7 +4,7 @@ Page({
     type2: 'daterange',
     minDate: Date.now(),
     value1: Date.now(),
-    value2: [Date.now(), Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() + 24 * 60 * 60 * 1000 * 3],
+    value2: '',
     value3: [Date.now() - 24 * 60 * 60 * 1000 * 33, Date.now()],
     value4: [Date.now() - 24 * 60 * 60 * 1000 * 3, Date.now() - 24 * 60 * 60 * 1000],
     formatter: function (day) {

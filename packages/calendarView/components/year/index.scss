@@ -54,8 +54,7 @@
       }
       .wd-year__month-text {
         background: $-calendar-active-color;
-        border-top-left-radius: $-calendar-active-border;
-        border-bottom-left-radius: $-calendar-active-border;
+        border-radius: $-calendar-active-border;
       }
       &.is-without-end::after {
         display: none;
@@ -75,8 +74,7 @@
       }
       .wd-year__month-text {
         background: $-calendar-active-color;
-        border-top-right-radius: $-calendar-active-border;
-        border-bottom-right-radius: $-calendar-active-border;
+        border-radius: $-calendar-active-border;
       }
     }
     @include when(same) {
