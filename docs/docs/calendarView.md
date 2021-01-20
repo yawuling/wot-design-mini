@@ -1,5 +1,7 @@
 ## CalendarView 日历面板组件
 
+[2.3.0版本新增]()
+
 提供日历单选、多选、范围选择、周纬度、月纬度等功能。可以根据实际业务场景基于该组件进行封装高度定制化组件。
 
 ### 引入
@@ -119,6 +121,57 @@ Page({
 })
 ```
 
+### 日期时间类型
+
+设置 `type` 为 `datetime` 类型，可以选择到时分秒，设置 `type` 为 `datetimerange` 为范围选择。
+
+```html
+<wd-calendar-view type="datetime" value="{{ value }}" bind:change="handleChange" />
+```
+
+```javascript
+Page({
+  data: {
+    value: ''
+  },
+  handleChange (event) {
+    this.setData({
+      value: event.detail.value
+    })
+  }
+})
+```
+
+可以设置 `hide-second`，使时间只展示到分钟级别；设置 `time-filter` 属性，可以自定义过滤 时分秒 选项，该属性接收 { type: string, values: array } 参数，返回一个新的数组，type 值为 'hour'、'minute'
+ 或 'second'，values 为picker数据列表。
+
+```html
+<wd-calendar-view type="datetime" value="{{ value }}" bind:change="handleChange" hide-second time-filter="{{ timeFilter }}" />
+```
+
+```javascript
+Page({
+  data: {
+    value: '',
+    timeFilter ({ type, values }) {
+      if (type === 'minute') {
+        // 只展示 0,10,20,30,40,50 分钟选项
+        return values.filter(item => {
+          return item % 10 === 0
+        })
+      }
+
+      return values
+    }
+  },
+  handleChange (event) {
+    this.setData({
+      value: event.detail.value
+    })
+  }
+})
+```
+
 ### 范围选择允许选中同一日期
 
 设置 `allow-same-day` 属性，范围选择允许用户选择同一天、同一周、同一个月。
@@ -210,4 +263,25 @@ Page({
 <wd-calendar-view type="daterange" show-panel-title="{{ false }}" />
 ```
 
+### 设置周起始日
 
+设置 `first-day-of-week` 属性，默认为 0。
+
+### Attributes
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
+|-----|-----|------|-------|-------|-----|
+| value | 选中值，为 13 位时间戳或时间戳数组 | null / number / array | - | - | 2.3.0 |
+| type | 日期类型 | string | 'date' / 'dates' / 'datetime' / 'week' / 'month' / 'daterange' / 'datetimerange' / 'weekrange' / 'monthrange' | 'date' | 2.3.0 |
+| min-date | 最小日期，为 13 位时间戳 | number | - | 当前日期往前推 6 个月 | 2.3.0 |
+| max-date | 最大日期，为 13 位时间戳 | number | - | 当前日期往后推 6 个月 | 2.3.0 |
+| first-day-of-week | 周起始天 | number | - | 0 | 2.3.0 |
+| formatter | 日期格式化函数 | function | - | - | 2.3.0 |
+| max-range | type 为范围选择时有效，最大日期范围 | number | - | - | 2.3.0 |
+| range-prompt | type 为范围选择时有效，选择超出最大日期范围时的错误提示文案 | string | - | '选择天数不能超过x天' | 2.3.0 |
+| allow-same-day | type 为范围选择时有效，是否允许选择同一天 | boolean | - | false | 2.3.0 |
+| show-panel-title | 是否展示面板标题，自动计算当前滚动的日期月份 | boolean | - | true | 2.3.0 |
+| default-time | 选中日期所使用的当日内具体时刻 | string / array | - | '00:00:00' | 2.3.0 |
+| panel-height | 可滚动面板的高度 | number | - | 378 | 2.3.0 |
+| time-filter | type 为 'datetime' 或 'datetimerange' 时有效，用于过滤时间选择器的数据 | function | - | - | 2.3.0 |
+| hide-second | type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改 | boolean | - | false | 2.3.0 |

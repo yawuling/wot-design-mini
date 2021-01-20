@@ -1,5 +1,4 @@
 import VueComponent from '../common/component'
-import { getType } from '../common/util'
 import { getDefaultTime } from './utils'
 
 const current = new Date()
@@ -17,14 +16,6 @@ VueComponent({
       type: String,
       value: 'date'
     },
-    beforeConfirm: {
-      type: null,
-      observer (fn) {
-        if (getType(fn) !== 'function') {
-          throw Error('The type of beforeConfirm must be Function')
-        }
-      }
-    },
     minDate: {
       type: Number,
       value: new Date(currentYear, currentMonth - 6, currentDay).getTime()
@@ -35,7 +26,7 @@ VueComponent({
     },
     firstDayOfWeek: {
       type: Number,
-      value: 7
+      value: 0
     },
     formatter: null,
     maxRange: Number,

@@ -30,18 +30,18 @@
       color: $-calendar-active-color;
     }
     @include when(selected) {
-      border-radius: $-calendar-active-border;
-      background: $-calendar-active-color;
-      color: #fff;
+      .wd-month__day-container {
+        border-radius: $-calendar-active-border;
+        background: $-calendar-active-color;
+        color: #fff;
+      }
     }
     @include when(middle) {
-      background: $-calendar-range-color;
+      .wd-month__day-container {
+        background: $-calendar-range-color;
+      }
     }
     @include when(start) {
-      background: $-calendar-active-color;
-      color: #fff;
-      border-radius: $-calendar-active-border;
-
       &::after {
         position: absolute;
         content: '';
@@ -50,17 +50,18 @@
         right: 0;
         left: 50%;
         background: $-calendar-range-color;
-        z-index: 0;
+        z-index: 1;
       }
       &.is-without-end::after {
         display: none;
       }
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
+      }
     }
     @include when(end) {
-      background: $-calendar-active-color;
-      color: #fff;
-      border-radius: $-calendar-active-border;
-
       &::after {
         position: absolute;
         content: '';
@@ -69,18 +70,25 @@
         left: 0;
         right: 50%;
         background: $-calendar-range-color;
-        z-index: 0;
+        z-index: 1;
+      }
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
       }
     }
     @include when(same) {
-      background: $-calendar-active-color;
-      color: #fff;
-      border-radius: $-calendar-active-border;
+      .wd-month__day-container {
+        background: $-calendar-active-color;
+        color: #fff;
+        border-radius: $-calendar-active-border;
+      }
     }
   }
   @include e(day-container) {
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
   @include e(day-text) {
     font-weight: $-calendar-day-fw;

@@ -5,9 +5,7 @@ import Toast from '../../../toast/toast.js'
 
 VueComponent({
   data: {
-    days: [],
-    value: [],
-    rangeType: 'start'
+    days: []
   },
   props: {
     type: {
@@ -78,11 +76,11 @@ VueComponent({
         return this.getDatesType(date)
       case 'daterange':
       case 'datetimerange':
-        return this.getDateRangeType(date, value)
+        return this.getDatetimeType(date, value)
       case 'week':
-        return this.getWeekRangeType(date, value)
+        return this.getWeektimeType(date, value)
       case 'weekrange':
-        return this.getWeekRangeType(date, value)
+        return this.getWeektimeType(date, value)
       default:
         return this.getDateType(date)
       }
@@ -111,7 +109,7 @@ VueComponent({
 
       return type
     },
-    getDateRangeType (date, value) {
+    getDatetimeType (date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
@@ -127,7 +125,7 @@ VueComponent({
         return ''
       }
     },
-    getWeekRangeType (date, value) {
+    getWeektimeType (date, value) {
       const [startDate, endDate] = value || []
 
       if (startDate && compareDate(date, startDate) === 0) {
@@ -248,7 +246,7 @@ VueComponent({
         }
       } else if (this.data.type === 'datetimerange' && startDate && endDate) {
         // 时间范围类型，且有开始时间和结束时间，需要支持重新点击开始日期和结束日期可以重新修改时间
-        if (compare === 0 && this.data.rangeType !== 'start') {
+        if (compare === 0) {
           type = 'start'
           value = this.data.value
         } else if (compareDate(date.date, endDate) === 0) {
@@ -259,12 +257,6 @@ VueComponent({
         }
       } else {
         value = [this.getDate(date.date), null]
-      }
-      if (this.data.type === 'datetimerange') {
-        // 记录范围 type 类型，用于选择同一天的情况下可以知道下面的时间picker是展示开始时间还是结束时间
-        this.setData({
-          rangeType: type || (value[1] ? 'end' : 'start')
-        })
       }
 
       this.$emit('change', {

@@ -8,6 +8,8 @@
   - 新增 `default-value` 属性，支持设置面板默认展示值 (by [@yawuling](https://github.com/yawuling) ) )
 - Input
   - 添加自定义外部类名 `custom-textarea-container-class` (by [@yawuling](https://github.com/yawuling) ) )
+- Switch
+  - 新增 `before-change` 修改前钩子  (by [@yawuling](https://github.com/yawuling) ) )
 - Upload
   - `file` 对象添加 `response` 字段 (by [@yawuling](https://github.com/yawuling) ) )
 
@@ -24,6 +26,8 @@
 
 - ActionSheet
   - 修复 `panels` 多行快捷方式的条件判断 (by [@yawuling](https://github.com/yawuling) ) )
+- Button
+  - 修复 `loading` 属性的类型问题 (by [@yawuling](https://github.com/yawuling) ) )
 - Cell
   - 修复 `border` 类型的展示异常问题 (by [@yawuling](https://github.com/yawuling) ) )
 - ColPicker
@@ -37,6 +41,8 @@
   - 修复手动设置首选项无效问题 (by [@yawuling](https://github.com/yawuling) ) )
 - SelectPicker
   - 修复自定义 `label` 插槽失败的问题 (by [@yawuling](https://github.com/yawuling) ) )
+- Upload
+  - 修复 `disabled` 状态下可以删除图片的问题 (by [@yawuling](https://github.com/yawuling) ) )
 
 ### 2.2.0
 

@@ -4,9 +4,23 @@ import { getType, debounce, isEqual } from '../../../common/util'
 
 VueComponent({
   props: {
-    type: String,
+    type: {
+      type: String,
+      observer (val) {
+        if ((val === 'datetime' && this.data.value) || (val === 'datetimerange' && this.data.value && this.data.value.length > 0)) {
+          this.setTime(this.data.value, 'start')
+        }
+      }
+    },
     value: {
-      type: [null, Number, Array]
+      type: [null, Number, Array],
+      observer (val, oldVal) {
+        if (isEqual(val, oldVal)) return
+
+        if ((this.data.type === 'datetime' && val) || (this.data.type === 'datetimerange' && val && val.length > 0)) {
+          this.setTime(val, 'start')
+        }
+      }
     },
     minDate: Number,
     maxDate: Number,
@@ -140,6 +154,16 @@ VueComponent({
 
       return this.data.hideSecond ? [hour, minute] : [hour, minute, second]
     },
+    setTime (value, type) {
+      this.setData({
+        timeData: this.getTimeData(value, type),
+        timeValue: this.getTimeValue(value, type),
+        timeType: type
+      }, () => {
+        // 重新设置 thresholds
+        this.initRect([0, 0.58, 0.69, 0.83, 1])
+      })
+    },
     handleDateChange ({ detail: { value, type } }) {
       if (!isEqual(value, this.data.value)) {
         this.setData({
@@ -149,14 +173,7 @@ VueComponent({
       }
       // datetime 和 datetimerange 类型，需要计算 timeData 并做展示
       if (this.data.type.indexOf('time') > -1) {
-        this.setData({
-          timeData: this.getTimeData(value, type),
-          timeValue: this.getTimeValue(value, type),
-          timeType: type
-        }, () => {
-          // 重新设置 thresholds
-          this.initRect([0, 0.58, 0.69, 0.83, 1])
-        })
+        this.setTime(value, type)
       }
     },
     handleChange (value) {
