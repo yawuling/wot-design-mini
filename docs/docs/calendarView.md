@@ -2,7 +2,7 @@
 
 [2.3.0版本新增]()
 
-提供日历单选、多选、范围选择、周纬度、月纬度等功能。可以根据实际业务场景基于该组件进行封装高度定制化组件。
+提供日历单选、多选、范围选择、周维度、月维度等功能。可以根据实际业务场景基于该组件进行封装高度定制化组件。
 
 ### 引入
 
@@ -249,7 +249,7 @@ Page({
 
 ### 最大范围限制
 
-设置 `maxRange` 属性，设置范围选择的最大限制。
+设置 `max-range` 属性，设置范围选择的最大限制。
 
 ```html
 <wd-calendar-view type="daterange" max-range="{{ 3 }}" />
@@ -265,7 +265,7 @@ Page({
 
 ### 设置周起始日
 
-设置 `first-day-of-week` 属性，默认为 0。
+设置 `first-day-of-week` 属性，默认为 0，即周日，设置为 1 则为周一，依此类推。
 
 ### Attributes
 
@@ -285,3 +285,15 @@ Page({
 | panel-height | 可滚动面板的高度 | number | - | 378 | 2.3.0 |
 | time-filter | type 为 'datetime' 或 'datetimerange' 时有效，用于过滤时间选择器的数据 | function | - | - | 2.3.0 |
 | hide-second | type 为 'datetime' 或 'datetimerange' 时有效，是否不展示秒修改 | boolean | - | false | 2.3.0 |
+
+### Events
+
+| 事件名称 | 说明 | 参数 |
+|---------|-----|-----|
+| bind:change | 绑定值变化时触发 | event.detail = { value } |
+
+### Methods
+
+| 方法名称 | 说明 | 参数 |
+|---------|-----|-----|
+| scrollIntoView | 使当前日期或者选中日期滚动到可视区域，并监听滚动，在面板从 隐藏状态（如 display: none） 切换为展示状态时调用 | thresholds，数字数组，具体使用见 [Intersection Observer](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver) |
