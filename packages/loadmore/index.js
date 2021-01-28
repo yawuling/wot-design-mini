@@ -20,7 +20,7 @@ VueComponent({
     },
     finishedText: {
       type: String,
-      value: '已加载完毕'
+      value: '没有更多了~'
     },
     errorText: String
   },

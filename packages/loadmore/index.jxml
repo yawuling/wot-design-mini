@@ -1,5 +1,5 @@
 <view class="wd-loadmore custom-class" bindtap="reload">
-  <wd-divider jd:if="{{ state === 'finished' }}">{{ finishedText }}</wd-divider>
+  <text jd:if="{{ state === 'finished' }}" class="wd-loadmore__text">{{ finishedText }}</text>
   <block jd:if="{{ state === 'error' }}">
     <block jd:if="{{ errorText }}">
       {{ errorText }}
