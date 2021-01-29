@@ -2,7 +2,7 @@
  * 辅助函数
  */
 @import 'config';
-$default-theme: #FA4350 !default; // 正常色
+$default-theme: #FF0000 !default; // 正常色
 
 /* 转换成字符串 */
 @function selectorToString($selector) {
