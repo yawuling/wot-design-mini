@@ -622,7 +622,7 @@ $-sort-button-line-color: resultColor(
 /* steps */
 $-steps-icon-size: 22px !default; // 图标尺寸
 $-steps-inactive-color: rgba($-color-black, 0.25) !default; // 等待状态文字颜色
-$-steps-finished-color: #f00 !default; // 完成文字颜色
+$-steps-finished-color: $-color-theme !default; // 完成文字颜色
 $-steps-icon-text-fs: $-fs-content !default; // 数字图标文字字号
 $-steps-error-color: $-color-danger !default; // 异常颜色
 $-steps-title-fs: $-fs-content !default; // 标题字号
