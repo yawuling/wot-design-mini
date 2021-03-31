@@ -39,6 +39,7 @@
         selection-end="{{ selectionEnd }}"
         adjust-position="{{ adjustPosition }}"
         hold-keyboard="{{ holdKeyboard }}"
+        disable-default-padding
         bindinput="handleInput"
         bindfocus="handleFocus"
         bindblur="handleBlur"
