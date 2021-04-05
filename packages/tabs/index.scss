@@ -48,7 +48,7 @@
     height: $-tabs-nav-line-height;
     background: $-tabs-nav-line-bg-color;
     z-index: 1;
-    border-radius: 2px;
+    border-radius: $-tabs-nav-line-height;
   }
   @include e(container) {
     overflow: hidden;

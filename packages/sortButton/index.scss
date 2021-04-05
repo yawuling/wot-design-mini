@@ -17,7 +17,7 @@
         left: 50%;
         transform: translate(-50%, 0);
         background: $-sort-button-line-color;
-        border-radius: $-sort-button-line-height / 2;
+        border-radius: $-sort-button-line-height;
         transition: opacity .15s;
         opacity: 0;
       }

@@ -153,10 +153,10 @@ $-button-normal-border-disabled-color: $-color-bg !default; // 默认按钮禁�
 $-button-border-color: mix($-color-black, $-color-white, 0.65) !default; // 默认按钮边框色
 
 $-button-primary-color: $-color-theme !default; // 主要按钮颜色
-$-button-primary-bg-color: linear-gradient(90deg, rgba(255,0,0,1) 0%,rgba(255,95,68,1) 100%) !default; // 主要按钮背景颜色
-$-button-primary-active-color: linear-gradient(90deg, rgba(237,10,10,1) 0%,rgba(242,67,38,1) 100%) !default; // 主要按钮点击态颜色
+$-button-primary-bg-color: linear-gradient(270deg, rgba(255,0,0,1) 0%,rgba(255,95,68,1) 100%) !default; // 主要按钮背景颜色
+$-button-primary-active-color: linear-gradient(270deg, rgba(237,10,10,1) 0%,rgba(242,67,38,1) 100%) !default; // 主要按钮点击态颜色
 $-button-primary-plain-active-bg-color: rgba(255,39,0,0.1) !default; // 主要按钮点击态颜色
-$-button-primary-disabled-color: linear-gradient(90deg, rgba(255,179,179,1) 0%,rgba(255,204,197,1) 100%) !default; // 主要按钮禁用颜色
+$-button-primary-disabled-color: linear-gradient(270deg, rgba(255,179,179,1) 0%,rgba(255,204,197,1) 100%) !default; // 主要按钮禁用颜色
 $-button-primary-plain-disabled-color: themeColor($-color-theme, "light", rgba(255,204,197,1)) !default; // 主要按钮点击态文字颜色
 $-button-primary-box-shadow-color: rgba(210,0,0, 0.15) !default; // 主要按钮阴影颜色
 
@@ -238,7 +238,7 @@ $-calendar-day-color: rgba(0, 0, 0, 0.85) !default;
 $-calendar-day-fw: 500 !default;
 $-calendar-day-height: 64px !default;
 $-calendar-month-width: 50px !default;
-$-calendar-active-color: linear-gradient(90deg, rgba(255,0,0,1) 0%,rgba(255,95,68,1) 100%) !default;
+$-calendar-active-color: linear-gradient(270deg, rgba(255,0,0,1) 0%,rgba(255,95,68,1) 100%) !default;
 $-calendar-disabled-color: rgba(0, 0, 0, 0.25) !default;
 $-calendar-range-color: rgba(255, 236, 227, 1) !default;
 $-calendar-active-border: 8px !default;
