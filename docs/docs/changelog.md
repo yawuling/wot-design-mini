@@ -6,6 +6,8 @@
 
 - ActionSheet
   - 新增 `lazy-render` 懒渲染属性 (by [@yawuling](https://github.com/yawuling) )
+- Calendar
+  - 新增日历选择器组件 (by [@yawuling](https://github.com/yawuling) )
 - CalendarView
   - 新增日历面板组件 (by [@yawuling](https://github.com/yawuling) )
 - Card
@@ -20,6 +22,8 @@
   - 新增 `bind:pickend` 事件，当滚动选择结束时候触发事件 (by [@yawuling](https://github.com/yawuling) )
 - Input
   - 添加自定义外部类名 `custom-textarea-container-class` (by [@yawuling](https://github.com/yawuling) )
+- ImgCropper
+  - 新增组件图片裁剪 (by [@HXCStudio123](https://github.com/HXCStudio123) )
 - MessageBox
   - 新增 `lazy-render` 懒渲染属性 (by [@yawuling](https://github.com/yawuling) )
 - Picker
@@ -63,12 +67,15 @@
   - 修复 `loading` 属性的类型问题 (by [@yawuling](https://github.com/yawuling) )
 - Cell
   - 修复 `border` 类型的展示异常问题 (by [@yawuling](https://github.com/yawuling) )
+- Checkbox
+  - 修复设置 `cell` 属性下新增选项时新增的选项缺少表单样式的问题 (by [@yawuling](https://github.com/yawuling) )
 - ColPicker
   - 修复自定义 `label` 插槽失败的问题 (by [@yawuling](https://github.com/yawuling) )
 - DatetimePicker
   - 修复 `error` 错误状态时 placeholder 未标红问题 (by [@yawuling](https://github.com/yawuling) )
   - 修复 `open` 和 `close` 无法调用问题 (by [@yawuling](https://github.com/yawuling) )
   - 修复滚动太快后点击确定按钮，未更新值的问题 (by [@yawuling](https://github.com/yawuling) )
+  - 修复范围选择二次赋值时值错乱的问题 (by [@yawuling](https://github.com/yawuling) )
 - Loadmore
   - 修复 loading 图标未正常展示的问题 (by [@yawuling](https://github.com/yawuling) )
 - MessageBox
@@ -88,6 +95,7 @@
 - Upload
   - 修复 `disabled` 状态下可以删除图片的问题 (by [@yawuling](https://github.com/yawuling) )
   - 修复图片删除图标层级过高问题 (by [@yawuling](https://github.com/yawuling) )
+  - 修复 `limit` 二次赋值为 null、undefined 时抛错的问题 (by [@yawuling](https://github.com/yawuling) )
 
 ### 2.2.0
 

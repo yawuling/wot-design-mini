@@ -61,6 +61,8 @@
         - type: group
           title: 数据输入
           children:
+            - name: calendar
+              title: Calendar 日历选择器
             - name: calendarView
               title: CalendarView 日历面板
             - name: checkbox
@@ -137,6 +139,8 @@
               title: Divider 分割线
             - name: img
               title: Img 图片
+            - name: imgCropper
+              title: ImgCropper 图片裁剪
             - name: grid
               title: Grid 宫格
             - name: loadmore

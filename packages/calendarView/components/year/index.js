@@ -70,7 +70,7 @@ VueComponent({
         const [startDate, endDate] = this.data.value || []
 
         if (startDate && compareMonth(date, startDate) === 0) {
-          if (this.data.allowSameDay && endDate && compareMonth(startDate, endDate) === 0) {
+          if (endDate && compareMonth(startDate, endDate) === 0) {
             return 'same'
           }
           return 'start'
@@ -85,7 +85,7 @@ VueComponent({
         if (this.data.value && compareMonth(date, this.data.value) === 0) {
           return 'selected'
         } else {
-          return []
+          return ''
         }
       }
     },

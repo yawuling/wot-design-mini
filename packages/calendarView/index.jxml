@@ -1,4 +1,4 @@
-<view class="wd-calendar-view">
+<view class="wd-calendar-view custom-class">
   <year-panel
     jd:if="{{ type === 'month' || type === 'monthrange' }}"
     id="yearPanel"
@@ -33,5 +33,7 @@
     time-filter="{{ timeFilter }}"
     hide-second="{{ hideSecond }}"
     bind:change="handleChange"
+    bind:pickstart="handlePickStart"
+    bind:pickend="handlePickEnd"
   />
 </view>

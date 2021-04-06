@@ -68,6 +68,12 @@ VueComponent({
       this.$emit('change', {
         value
       })
+    },
+    handlePickStart () {
+      this.$emit('pickstart')
+    },
+    handlePickEnd () {
+      this.$emit('pickend')
     }
   }
 })

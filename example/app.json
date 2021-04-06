@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/input/index",
+    "pages/imgCropper/index",
     "pages/tooltip/index",
     "pages/upload/index",
     "pages/slider/index",
@@ -50,7 +51,8 @@
     "pages/pagination/index",
     "pages/resize/index",
     "pages/calendarView/index",
-    "pages/calendar-pinpin/index"
+    "pages/calendar-pinpin/index",
+    "pages/calendar/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
