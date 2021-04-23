@@ -16,7 +16,9 @@
 
 ```html
 <wd-input-number value="{{ value }}" bind:change="handleChange" />
+```
 
+```javascript
 Page({
   data: {
     value: 1
@@ -85,31 +87,57 @@ Page({
 <wd-input-number value="{{ value }}" bind:change="handleChange" input-width="70px" />
 ```
 
+### 允许空值，设置 placeholder
+
+设置 `allow-null` 属性允许空值，设置 `placeholder` 提示填写。
+
+```html
+<wd-input-number value="{{ value }}" allow-null placeholder="不限" bind:change="handleChange" />
+```
+
+```javascript
+Page({
+  data: {
+    value: ''
+  },
+  methods: {
+    handleChange (event) {
+      this.setData({
+        value: event.detail.value
+      })
+    }
+  }
+})
+```
+
 ### Attributes
 
-| 参数      | 说明                                 | 类型      | 可选值       | 默认值   |
-|---------- |------------------------------------ |---------- |------------- |-------- |
-| value | 绑定值 | number / string | - | - |
-| min | 最小值 | number | - | 1 |
-| max | 最大值 | number | - | Infinity |
-| step | 步数 | number | - | 1 |
-| step-strictly | 严格值为步数的倍数 | boolean | - | false |
-| precision | 小数精度 | number | - | 0 |
-| disabled | 禁用 | boolean | - | false |
-| without-input | 不显示输入框 | boolean | - | false |
-| input-width | 输入框宽度 | string | - | 36px |
-| name | form 表单中的字段名 | string | - | - |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 | 最低版本 |
+|-----|------|-----|-------|-------|--------|
+| value | 绑定值 | number / string | - | - | - |
+| min | 最小值 | number | - | 1 | - |
+| max | 最大值 | number | - | Infinity | - |
+| step | 步数 | number | - | 1 | - |
+| step-strictly | 严格值为步数的倍数 | boolean | - | false | - |
+| precision | 小数精度 | number | - | 0 | - |
+| disabled | 禁用 | boolean | - | false | - |
+| without-input | 不显示输入框 | boolean | - | false | - |
+| input-width | 输入框宽度 | string | - | 36px | - |
+| name | form 表单中的字段名 | string | - | - | - |
+| allow-null | 允许空值 | boolean | - | false | 2.3.0 |
+| placeholder | 占位文本 | string | - | - | 2.3.0 |
 
 ### Events
 
-| 事件名称      | 说明                                 | 参数     |
-|------------- |------------------------------------ |--------- |
-| bind:change | 值修改事件 | event.detail = { value } |
-| bind:focus | 输入框获取焦点事件 | event.detail = { value, height } |
-| bind:blur | 输入框失去焦点事件 | event.detail = { value } |
+| 事件名称 | 说明 | 参数 | 最低版本 |
+|---------|-----|-----|---------|
+| bind:change | 值修改事件 | event.detail = { value } | - |
+| bind:focus | 输入框获取焦点事件 | event.detail = { value, height } | - |
+| bind:blur | 输入框失去焦点事件 | event.detail = { value } | - |
 
 ### 外部样式类
 
-| 类名     | 说明                |
-|---------|---------------------|
-| custom-class | 根结点样式 |
+| 类名 | 说明 | 最低版本 |
+|-----|------|--------|
+| custom-class | 根结点样式 | - |
+

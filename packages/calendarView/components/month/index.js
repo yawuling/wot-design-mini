@@ -210,7 +210,7 @@ VueComponent({
       if (date.disabled) return
 
       const value = this.data.value || []
-      if (date.type !== 'seleced') {
+      if (date.type !== 'selected') {
         value.push(this.getDate(date.date))
       } else {
         value.splice(value.indexOf(date.date), 1)
@@ -283,8 +283,11 @@ VueComponent({
       let value
       const [startDate, endDate] = this.data.value || []
       const [startWeekStartDate] = startDate ? getWeekRange(startDate, this.data.firstDayOfWeek) : []
+      const compare = compareDate(weekStartDate, startWeekStartDate)
 
-      if (startDate && !endDate && compareDate(weekStartDate, startWeekStartDate) > -1) {
+      if (startDate && !endDate && compare > -1) {
+        if (!this.data.allowSameDay && compare === 0) return
+
         value = [this.getDate(startWeekStartDate) + 24 * 60 * 60 * 1000, this.getDate(weekStartDate) + 24 * 60 * 60 * 1000]
       } else {
         value = [this.getDate(weekStartDate) + 24 * 60 * 60 * 1000, null]

@@ -1,40 +1,65 @@
 ## 更新日志
 
+### 2.3.1
+
+*2021-04-22*
+
+- CalendarView
+  - 修复 `dates` 类型下无法取消选中日期的问题 (by [@yawuling](https://github.com/yawuling) )
+
 ### 2.3.0
+
+*2021-04-22*
 
 #### 新特性
 
 - ActionSheet
   - 新增 `lazy-render` 懒渲染属性 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
 - Calendar
   - 新增日历选择器组件 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `ellipsis` 属性，设置是否超出隐藏，默认 `false` (by [@yawuling](https://github.com/yawuling) )
 - CalendarView
   - 新增日历面板组件 (by [@yawuling](https://github.com/yawuling) )
 - Card
   - 新增 `custom-class`、`custom-title-class`、`custom-content-class`、`custom-footer-class` 自定义样式 (by [@yawuling](https://github.com/yawuling) )
 - ColPicker
   - 新增 `z-index` 属性，设置弹层层级 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `ellipsis` 属性，设置是否超出隐藏，默认 `false` (by [@yawuling](https://github.com/yawuling) )
 - DatetimePicker
   - 新增 `default-value` 属性，支持设置面板默认展示值 (by [@yawuling](https://github.com/yawuling) )
   - 新增 `z-index` 属性，设置弹层层级 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `ellipsis` 属性，设置是否超出隐藏，默认 `false` (by [@yawuling](https://github.com/yawuling) )
 - DatetimePickerView
   - 新增 `bind:pickstart` 事件，当滚动选择开始时候触发事件 (by [@yawuling](https://github.com/yawuling) )
   - 新增 `bind:pickend` 事件，当滚动选择结束时候触发事件 (by [@yawuling](https://github.com/yawuling) )
 - Input
   - 添加自定义外部类名 `custom-textarea-container-class` (by [@yawuling](https://github.com/yawuling) )
+- InputNumber
+  - 新增 `allow-null` 属性允许空值 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `placeholder` 属性设置占位文本 (by [@yawuling](https://github.com/yawuling) )
 - ImgCropper
   - 新增组件图片裁剪 (by [@HXCStudio123](https://github.com/HXCStudio123) )
 - MessageBox
+  - 新增 `z-index` 属性，设置弹层层级 (by [@yawuling](https://github.com/yawuling) )
   - 新增 `lazy-render` 懒渲染属性 (by [@yawuling](https://github.com/yawuling) )
 - Picker
   - 新增 `z-index` 属性，设置弹层层级 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `ellipsis` 属性，设置是否超出隐藏，默认 `false` (by [@yawuling](https://github.com/yawuling) )
 - PickerView
   - 新增 `bind:pickstart` 事件，当滚动选择开始时候触发事件 (by [@yawuling](https://github.com/yawuling) )
   - 新增 `bind:pickend` 事件，当滚动选择结束时候触发事件 (by [@yawuling](https://github.com/yawuling) )
 - Popup
   - 新增 `lazy-render` 懒渲染属性 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
 - SelectPicker
   - 新增 `z-index` 属性，设置弹层层级 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `safe-area-inset-bottom` 属性，设置底部安全距离 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `filterable` 和 `filter-placeholder` 属性，支持本地搜索 (by [@yawuling](https://github.com/yawuling) )
+  - 新增 `ellipsis` 属性，设置是否超出隐藏，默认 `false` (by [@yawuling](https://github.com/yawuling) )
 - Switch
   - 新增 `before-change` 修改前钩子 (by [@yawuling](https://github.com/yawuling) )
 - Toast
@@ -44,6 +69,8 @@
 
 #### 优化
 
+- Card
+  - 优化卡片组件的样式结构 (by [@yawuling](https://github.com/yawuling) )
 - PickerView
   - 优化多次触发 `change` 事件的问题 (by [@yawuling](https://github.com/yawuling) )
   - 优化多列数据的情况下 `value` 为空时，默认触发一次选中首个选项 (by [@yawuling](https://github.com/yawuling) )
@@ -87,6 +114,7 @@
 - Popover
   - 修复插槽宽度较小时，弹出层的箭头样式偏移错乱问题 (by [@yawuling](https://github.com/yawuling) )
   - 修正 `offset` 属性的使用 (by [@yawuling](https://github.com/yawuling) )
+  - 修改文案过长时显示省略 (by [@yawuling](https://github.com/yawuling) )
 - SelectPicker
   - 修复自定义 `label` 插槽失败的问题 (by [@yawuling](https://github.com/yawuling) )
 - Tooltip
@@ -96,6 +124,10 @@
   - 修复 `disabled` 状态下可以删除图片的问题 (by [@yawuling](https://github.com/yawuling) )
   - 修复图片删除图标层级过高问题 (by [@yawuling](https://github.com/yawuling) )
   - 修复 `limit` 二次赋值为 null、undefined 时抛错的问题 (by [@yawuling](https://github.com/yawuling) )
+
+#### 本次更新可能影响范围
+
+- ColPicker、DatetimePicker、Picker、SelectPicker 原先值为超出默认隐藏，显示为省略号，本次调整为默认不隐藏，若需隐藏，需手动设置 `ellipsis` 属性
 
 ### 2.2.0
 
